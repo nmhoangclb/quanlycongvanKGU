@@ -1,0 +1,12 @@
+.table-form tr td{
+	padding: 10px;
+	margin:20px;
+	width: 85%;
+}
+
+.button-form{
+	padding: 20px;
+}
+.table-form thead {
+	padding-top: 50px; 
+}
