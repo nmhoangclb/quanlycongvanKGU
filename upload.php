@@ -69,12 +69,11 @@
     } else {
         echo '<div class="update-success">
               
-              <strong>Tải lên thành công!</strong> File path: <pre>' . $upload_result["path"] . '</pre>
+              <strong>Success!</strong> File path: <pre>' . $upload_result["path"] . '</pre>
 
             </div>';
             //get giá trị của form
-            $con = mysqli_connect('localhost', 'root', '', 'quanlycongvan');
-            mysqli_set_charset($con,"utf8");
+            include_once "connections.php";
             $sohieu = $_POST['sohieu'];                  
             $ngaybanhanh = $_POST['ngaybanhanh'];
             $noidung = $_POST['noidung'];
@@ -84,10 +83,10 @@
                 //echo $ten_tap_tin;
 
             $insert_File_Name = "INSERT INTO taptin ( Name ) VALUES ('" .$ten_tap_tin. "')";
-            mysqli_query($con,  $insert_File_Name);
+            mysqli_query($conn,  $insert_File_Name);
             //Xử lý mã tập tin
             $sql_select_id = "SELECT id FROM taptin WHERE ( Name ) = ('" .$ten_tap_tin. "')";
-            $result_taptin = mysqli_query($con, $sql_select_id );
+            $result_taptin = mysqli_query($conn, $sql_select_id );
             $row_taptin = mysqli_fetch_array($result_taptin);
             $mataptin = $row_taptin['id'];
 
@@ -105,8 +104,8 @@
             
             
             $sql_insert_congvan ='INSERT INTO congvan ( soHieu, ngayVanBan, noiDung, mataptin, conhieuluc, coquanbanhanh, hinhthucvanban, linhvuc, loaivanban) VALUES ("'.$sohieu.'","'.$ngaybanhanh.'","'.$noidung.'","'.$mataptin.'","'.$conhieuluc.'","'.$coquanbanhanh.'","'.$hinhthucvanban.'","'.$linhvuc.'","'.$loaivanban.'")';
-            mysqli_query($con, $sql_insert_congvan);
-            mysqli_close($con);
+            mysqli_query($conn, $sql_insert_congvan);
+            mysqli_close($conn);
 
             header( "Refresh:3; url='admin.php'");
             exit;

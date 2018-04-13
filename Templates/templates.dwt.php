@@ -1,24 +1,13 @@
-<?php session_start(); ?>
-<?php
-
-  if(isset($_SESSION['user'])){
-	 header('Location: admin.php');
-	 exit();
-  }
- ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/templates.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<!-- InstanceBeginEditable name="doctitle" -->
-
+<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+<!-- TemplateBeginEditable name="doctitle" -->
 <title>Untitled Document</title>
-<link rel="stylesheet" href="css/style-table.css" />
-
-<!-- InstanceEndEditable -->
-<!-- InstanceBeginEditable name="head" -->
-<!-- InstanceEndEditable -->
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
 
 
 
@@ -29,17 +18,17 @@
 <div  class="wrapper">
 	<!--start header--> <!-- -->	
 	<div class="header" id="header">
-		<a href="index.php"><img src="images/logo.png" width="1000" height="140" alt="logo.png" /></a>
-	<!-- InstanceBeginEditable name="MenuTop" -->
+		<a href="index.php"><img src="../images/logo.png" width="1000" height="140" alt="logo.png" /></a>
+	<!-- TemplateBeginEditable name="MenuTop" -->
     	<!--Start menutop-->
 		<div class="topnav">
           <a class="active" href="index.php">Trang chủ</a>
-          <a href="admin.php">Trang quản trị</a>
-          <a href="contact.php">Liên hệ - Góp ý</a>
-          <a href="about.php">Giới thiệu</a>
+          <a href="#admin.php">Trang quản trị</a>
+          <a href="#contact.php">Liên hệ - Góp ý</a>
+          <a href="#about.php">Giới thiệu</a>
           <!--start search form-->
             <div class="form-search">
-                <form id="form-search" name="search" method="get" action="search.php">
+                <form id="form-search" name="form1" method="get" action="">
                   <label>Tìm kiếm:</label>
                   <input type="text" name="txt-search" id="txt-search" />
                   <input type="submit" name="btn-search" id="btn-search" size="40" maxlength="40" value="Tìm kiếm" />
@@ -48,8 +37,7 @@
         <!--end search form-->   
 		</div>
         <!--end menutop-->
-      
-    <!-- InstanceEndEditable -->	
+	<!-- TemplateEndEditable -->	
          
         
    	  
@@ -98,21 +86,9 @@
 		<!--end menu left-->
         <!--star content right-->
 		<div class="content-right">
-		<!-- InstanceBeginEditable name="main-content" -->
-        <?php 
-				include_once "loadDocNew.php";
-				
-				include_once "Table_index.php";
-				
-				
-		 ?>
-        
-		
-                    
-   
-	
-	
-	<!-- InstanceEndEditable -->
+		<!-- TemplateBeginEditable name="main-content" -->
+        content-right
+		<!-- TemplateEndEditable -->
         </div>
         <!--end content right-->
     </div>
@@ -134,4 +110,4 @@
 
 
 </body>
-<!-- InstanceEnd --></html>
+</html>

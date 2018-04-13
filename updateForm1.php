@@ -1,139 +1,113 @@
-	<?php session_start(); ?>
-	<?php// required(); ?>
+<?php session_start(); ?>
+<?php
 
-	<?php
+  if(isset($_SESSION['user'])){
+	// header('Location: admin.php');
+	// exit();
+  }else{
+	 header('Location: admin.php');
+	exit();
+  }
+ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/templates.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Untitled Document</title>
+<script>
+		function gotoback() {
+		window.location.assign("admin.php");
+		}
+	</script>
+<!-- InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
 
-	  if(isset($_SESSION['user'])){
-	    // header('Location: admin.php');
-	    // exit();
-	  }else{
-	  	header('Location: login.html');
-	  	exit();
-	  }
-	 ?>
-	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-	<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Quản lí công văn</title>
-	<link rel="stylesheet" type="text/css" href="css/trangchu.css"/>
-	<link rel="stylesheet" type="text/css" href="css/menuleft.css"/>
-	<link rel="stylesheet" type="text/css" href="css/formupdate.css"/>
-	</head>
-	<body>
-	<!-- Star: main -->
-	<div class="wrapper" >
-	<!-- Star: header -->
 
-	<div id="header" class="header">
-		<img src="images/logo.png" width="1000" height="auto" alt="logo" longdesc="images/logo.png" />
-	</div>
-	<!-- End: header -->
 
-	<!-- Star: menu -->
-	<div id="menu" class="menu">
-	        <div class="dropdownmenu">
-	          <ul>
-	            <li><a href="index.php">Trang chủ</a></li>
-	            <li><a href="admin.php">Trang quản trị</a></li>
-	            <li><a href="updateFrom.php">Quản lí văn bản</a></li>
-	            <li><a href="#">Góp ý - Liên hệ</a></li>
-	            <li><a href="#">Giới thiệu</a></li>
-	            <li><a href="logout.php">Đăng xuất</a></li>
-	          </ul>
-	          </div>
-	</div>
-	<!-- End: menu -->
-	<!-- Star: container -->
 
-	<div id="container" class="container">
-	<!-- Star: left -->
+</head>
 
-		<div id="left" class="left">
-			
-			<!-- Table left -->
-			<!-- 
-			<table>
-		    	<tr>
-		        <td><img src="images/logoleft.jpg" width="195" height="auto" alt="logoleft" longdesc="images/logoleft.jpg" /></td>
-		        </tr>
-		        <tr>
-		        <td><img src="images/logoleft2.jpg" width="195" height="auto" alt="logoleft2" longdesc="images/logoleft2.jpg" /></td>
-		        </tr>
-		        <tr>
-		        	<td><iframe width="195" height="150" src="https://www.youtube.com/embed/dbtEGjSvqAc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></td>
-		        </tr>
-		        <tr>
-		        <td><img src="images/happynewyear.jpg" width="195" height="auto" alt="happynewyear" longdesc="images/happynewyear.jpg" /></td>
-		        </tr>
-		        <tr>
-		        <td><img src="images/album2.png" width="195" height="135	" alt="album2" longdesc="images/album2.png" /></td>
-		        </tr>
-		        </tr>
-		        <tr>
-		        <td><img src="images/hopthu.jpg" width="195" height="135	" alt="hopthu" longdesc="images/hopthu.jpg" /></td>
-		        </tr>
-
-		    </table>
-		    -->
-		    <!-- category -->
-		    
-		    	<ul class="menuleft" id="menuleft">
-		        	<li><a href="#">Tất cả văn bản</a></li>
-		            <li><a href="#">Lĩnh vực</a>
-		            	
-		                	<li><a href="#">+ Y tế</a></li>
-		                    <li><a href="#">+ Các lĩnh vực khác</a></li>
-		                
-		            </li>
-		            <li><a href="#">Cơ quan ban hành</a>
-		            	
-		                	<li><a href="#">+ Quốc hội</a></li>
-		                    <li><a href="#">+ Chính phủ</a></li>
-		                    <li><a href="#">+ UBND tỉnh</a></li>
-		                    <li><a href="#">+ Ban tổ chức</a></li>
-		                    <li><a href="#">+ HĐND tỉnh</a></li>
-		                    <li><a href="#">+ Văn phòng sở y tế</a></li>
-		                
-		            </li>
-		            <li><a href="#">Hình thức văn bản</a>
-		            	
-		                    <li><a href="#">+ Luật</a></li>
-		                    <li><a href="#">+ Pháp lệnh</a></li>
-		                    <li><a href="#">+ Nghị định</a></li>
-		                    <li><a href="#">+ Chỉ thị</a></li>
-		                    <li><a href="#">+ Thông tư</a></li>
-		                    <li><a href="#">+ Quyết định</a></li>
-		                
-		            </li>
-		            
-		        </ul>
-		        
-		    <!-- end category -->
-		
+<body>
+<div  class="wrapper">
+	<!--start header--> <!-- -->	
+	<div class="header" id="header">
+		<a href="index.php"><img src="images/logo.png" width="1000" height="140" alt="logo.png" /></a>
+	<!-- InstanceBeginEditable name="MenuTop" -->
+    	<!--Start menutop-->
+		<div class="topnav">
+          <a class="active" href="index.php">Trang chủ</a>
+          <a href="#admin.php">Trang quản trị</a>
+          <a href="#contact.php">Liên hệ - Góp ý</a>
+          <a href="#about.php">Giới thiệu</a>
 		</div>
-
-		<!-- End: left -->
-
-	<!-- Star: content -->
-
-			<!-- Kết nối CSDL -->
-			<?php include 'connections.php'	;  ?>
+        <!--end menutop-->
+	<!-- InstanceEndEditable -->	
+         
+        
+   	  
+	</div>
+    <!--end header-->
+	<!--start content-->
+    <div class="content">
+    	<!--start menu left-->
+    	<div class="Menu-left">
+			<div class="container">  
+              <ul>
+              	<li class="dropdown">
+                    <input type="checkbox" />
+                    <a href="#" data-toggle="dropdown">Tất cả văn bản</a>
+                </li>
+                <li class="dropdown">
+                    <input type="checkbox" checked />
+                    <a href="#" data-toggle="dropdown">Lĩnh vực</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="yte.php">+ Y tế</a></li>
+                        <li><a href="#">+ Các lĩnh vực khác</a></li>
+                  	</ul>
+                </li>
+                <li class="dropdown" >
+                    <input type="checkbox" checked />
+                    <a href="#" data-toggle="dropdown">Cơ quan ban hành</a>
+					<ul class="dropdown-menu">
+                        <li><a href="#">UBND Tỉnh</a></li>
+                        <li><a href="#">Chính phủ</a></li>
+                        <li><a href="#">Sở y tế</a></li>                    
+					</ul>
+                </li>
+                <li class="dropdown">
+                  <input type="checkbox" checked />
+                  <a href="#" data-toggle="dropdown">Hình thức văn bản</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Văn bản chỉ đạo điều hành</a></li>
+                    <li><a href="#">Nghị quyết</a></li>
+                    <li><a href="#">Thông báo</a></li>
+                    <li><a href="#">Giấy mời</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>            		
+        </div>
+		<!--end menu left-->
+        <!--star content right-->
+		<div class="content-right">
+		<!-- InstanceBeginEditable name="main-content" -->
+        <?php include 'connections.php'	;  ?>
 
 	<?php 
 		if (isset($_GET['id'])){
 			$id = $_GET['id'];
 			// print_r ($id);
 			 $sql = "SELECT * FROM congvan WHERE idcongvan=".$id;
-			 $result= mysqli_query($con, $sql);
+			 $result= mysqli_query($conn, $sql);
 			 while ($row = mysqli_fetch_array($result)){ ?>
 
 
-	<div>
-		
-		<div id="content">
+	
 			<div class="table">
-		    	<form class="updateform" action="upload.php" method="post" enctype="multipart/form-data" >
+		    	<form class="table-update-form" action="upload.php" method="post" enctype="multipart/form-data" >
 		    		<table class="table-form">
 
 						<thead>
@@ -178,7 +152,7 @@
 				                    
 				                    <?php
 				                    
-				                    $result = mysqli_query($con, 'SELECT id,Name FROM hinhthucvanban');
+				                    $result = mysqli_query($conn, 'SELECT id,Name FROM hinhthucvanban');
 				                    while ($row2 = mysqli_fetch_assoc($result)) {
 
 				                        echo "<option value='$row2[id]'>" .$row2[Name]."</option>";
@@ -207,7 +181,7 @@
 				                    
 				                    <?php
 				                    
-				                    $result = mysqli_query($con, 'SELECT id,Name FROM coquanbanhanh');
+				                    $result = mysqli_query($conn, 'SELECT id,Name FROM coquanbanhanh');
 				                    while ($row3 = mysqli_fetch_assoc($result)) {
 
 				                        echo "<option value='$row3[id]'>" .$row3[Name]."</option>";
@@ -229,7 +203,7 @@
 		    					<td colspan="2">
 												<input type="hidden" name="conhieuluc" value='0' >
 												<input type="checkbox" name="conhieuluc" value='1' checked>
-		    					<td>
+		    					</td>
 		    				</tr>
 		    				
 
@@ -246,7 +220,7 @@
 				                    
 				                    <?php
 				                    
-				                    $result = mysqli_query($con, 'SELECT id,Name FROM loaivanban');
+				                    $result = mysqli_query($conn, 'SELECT id,Name FROM loaivanban');
 				                    while ($row4 = mysqli_fetch_assoc($result)) {
 
 				                        echo "<option value='$row4[id]'>" .$row4[Name]."</option>";
@@ -268,14 +242,15 @@
 		    					<?php 
 		    						$result = "";
 				                    $row = "";	
-		    						$result = mysqli_query($con, "SELECT id,Name FROM linhvuc ORDER BY id DESC");
+		    						$result = mysqli_query($conn, "SELECT id,Name FROM linhvuc ORDER BY id DESC");
 				                    while ($row = mysqli_fetch_assoc($result)) {
 				                    
 				                    	echo "<input type='radio' checked=True  name='linhvuc' value='"?> <?php echo $row["id"]. "' />" ;
 				                    	echo $row["Name"];
 				                    	
 				                	};
-				                 ?></td>
+				                 ?>
+                                 </td>
 				             	<!-- </td>
 		    					<td colspan="2"><input type="radio" name="linhvuc" checked>Khác
 								<input type="radio" name="linhvuc" checked>Y tế</td> -->
@@ -285,23 +260,24 @@
 								<td colspan="2"><input type="file" name="taptindinhkem" required></td>
 		    				</tr>
 		    				<tr class="button-form">
+								<td colspan="2"><input type="submit" name="save" value="Phát hành">
+								<input type="reset" name="reset" value="Reset">	
+								<input type="button" onclick="gotoback()" value="Quay lại" >
+								</td>
+		    				</tr>
+		    				<!-- <tr class="button-form">
 		    					<td colspan="2"><input type="submit" name="save" value="Phát hành">
 								<input type="reset" name="reset" value="Reset">
 								<input type="button" onclick="gotoback()" value="Quay lại" ><td>
-									<script>
-										function gotoback() {
-										    window.location.assign("admin.php")
-										}
-									</script>
-							</tr>
+									
+							</tr> -->
 		    			</tbody>
 
 		    		</table>
 					
 
 				</form>
-				<!-- Đóng kết nối -->
-				<?php mysqli_close($con); ?>
+				
 		    </div>
 	<!-- End: content -->
 
@@ -309,18 +285,13 @@
 	</div>
 		
 
-	<?php
-	 }
-		
-	}
-
-		else{ ?>
+	
 
 
 
 		<div id="content">
 			<div class="table">
-		    	<form class="updateform" action="upload.php" method="post" enctype="multipart/form-data" >
+		    	<form class="table-update-form" action="upload.php" method="post" enctype="multipart/form-data" >
 		    		<table class="table-form">
 
 						<thead>
@@ -354,9 +325,9 @@
 		    					<td colspan="2"><select name="hinhthucvanban" required>
 				                    <option value=''>-----Chọn-----</option>
 				                    <?php
-				                    $con = mysqli_connect('localhost', 'root', '','quanlycongvan');
-				                    mysqli_set_charset($con,"utf8");
-				                    $result = mysqli_query($con, 'SELECT id,Name FROM hinhthucvanban');
+				                    $conn = mysqli_connect('localhost', 'root', '','quanlycongvan');
+				                    mysqli_set_charset($conn,"utf8");
+				                    $result = mysqli_query($conn, 'SELECT id,Name FROM hinhthucvanban');
 				                    while ($row = mysqli_fetch_assoc($result)) {
 				                        echo "<option value='$row[id]'>" .$row[Name]."</option>";
 				                    }
@@ -372,7 +343,7 @@
 				                    <?php	
 				                    $result = "";
 				                    $row = "";		                    
-				                    $result = mysqli_query($con, 'SELECT id,Name FROM coquanbanhanh');
+				                    $result = mysqli_query($conn, 'SELECT id,Name FROM coquanbanhanh');
 				                    while ($row = mysqli_fetch_assoc($result)) {
 				                        echo "<option value='$row[id]'>" .$row[Name]."</option>";
 				                    }
@@ -387,7 +358,7 @@
 		    					<td colspan="2">
 												<input type="hidden" name="conhieuluc" value='0' >
 												<input type="checkbox" name="conhieuluc" value='1' checked>
-		    					<td>
+		    					</td>
 		    				</tr>
 		    				
 
@@ -398,7 +369,7 @@
 				                    <?php	
 				                    $result = "";
 				                    $row = "";			                    
-				                    $result = mysqli_query($con, 'SELECT id,Name FROM loaivanban');
+				                    $result = mysqli_query($conn, 'SELECT id,Name FROM loaivanban');
 				                    while ($row = mysqli_fetch_assoc($result)) {
 				                        echo "<option value='$row[id]'>" .$row[Name]."</option>";
 				                    }
@@ -413,7 +384,7 @@
 		    					<?php 
 		    						$result = "";
 				                    $row = "";	
-		    						$result = mysqli_query($con, "SELECT id,Name FROM linhvuc ORDER BY id DESC");
+		    						$result = mysqli_query($conn, "SELECT id,Name FROM linhvuc ORDER BY id DESC");
 				                    while ($row = mysqli_fetch_assoc($result)) {
 				                    
 				                    	echo "<input type='radio' checked=True  name='linhvuc' value='"?> <?php echo $row["id"]. "' />" ;
@@ -432,12 +403,7 @@
 		    				<tr class="button-form">
 		    					<td colspan="2"><input type="submit" name="save" value="Phát hành">
 								<input type="reset" name="reset" value="Reset">
-								<input type="button" onclick="gotoback()" value="Quay lại" ><td>
-									<script>
-										function gotoback() {
-										    window.location.assign("admin.php")
-										}
-									</script>
+								<input type="button" onclick="gotoback()" value="Quay lại" ></td>									
 							</tr>
 		    			</tbody>
 
@@ -446,39 +412,29 @@
 
 				</form>
 				<!-- Đóng kết nối -->
-				<?php mysqli_close($con); ?>
-		    </div>
+				<?php mysqli_close($conn); ?>
+		    
 	<!-- End: content -->
+		<!-- InstanceEndEditable -->
+        </div>
+        <!--end content right-->
+    </div>
+	<!--end content-->
+    <!--start footer-->
+    <div class="footer">
+    	<ul>
+        	<li>&copy <a href="https://fb.com/hoang10tn1">Nguyễn Minh Hoàng</a></li>
+            <li>Đơn vị: Đại học Kiên Giang</li>
+            <li>Email: hoang1501106004@vnkgu.edu.vn</li>
+            <li>Số điện thoại: 01656 9871 140</li>
+        </ul>
+    </div>
+    <!--end footer-->
+</div>
 
-	</div>
-
-	<!-- End: container -->
-	</div>
-
-
-	<?php } ?>
-
-
-	<!-- Start: footer -->
-	<div id="footer">
-
-		<span>&copy Nguyễn Minh Hoàng</span><br/>
-	    <span>Địa chỉ: Trường Đại Học Kiên Giang</span><br/>
-	    <span>Điện thoại: 01656 987 140</span><br/>
-	    <span>Email: hoang1501106004@vnkgu.edu.vn</span><br/>
-	    </div>
-	</div>
-	<!-- End: footer -->
-
-	</div>
-	<!-- End: wrapper -->
+<!--end wrapper-->
 
 
 
-	</body>
-	</html>
-
-
-
-
-	 
+</body>
+<!-- InstanceEnd --></html>

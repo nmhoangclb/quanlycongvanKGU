@@ -1,21 +1,32 @@
-<?php session_start(); ?>
-<?php
-
-  if(isset($_SESSION['user'])){
-	 header('Location: admin.php');
-	 exit();
-  }
- ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/templates.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
 <!-- InstanceBeginEditable name="doctitle" -->
-
 <title>Untitled Document</title>
-<link rel="stylesheet" href="css/style-table.css" />
+<script>
+		function gotoback() {
+		window.location.assign("admin.php");
+		}
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+<script>
+var check = function() {
+  if (document.getElementById('password').value ==
+    document.getElementById('confirm_password').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'matching';
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'not matching';
+  }
+}
+	function done (){
+		alert("Thay đổi mật khẩu thành công!");
+		}
+</script>
 <!-- InstanceEndEditable -->
 <!-- InstanceBeginEditable name="head" -->
 <!-- InstanceEndEditable -->
@@ -33,13 +44,13 @@
 	<!-- InstanceBeginEditable name="MenuTop" -->
     	<!--Start menutop-->
 		<div class="topnav">
-          <a class="active" href="index.php">Trang chủ</a>
-          <a href="admin.php">Trang quản trị</a>
-          <a href="contact.php">Liên hệ - Góp ý</a>
-          <a href="about.php">Giới thiệu</a>
+          <a href="index.php">Trang chủ</a>
+          <a href="#admin.php">Trang quản trị</a>
+          <a class="active" href="changePassWord.php">Đổi mật khẩu</a>
+          <a href="#about.php">Giới thiệu</a>
           <!--start search form-->
             <div class="form-search">
-                <form id="form-search" name="search" method="get" action="search.php">
+                <form id="form-search" name="form1" method="get" action="">
                   <label>Tìm kiếm:</label>
                   <input type="text" name="txt-search" id="txt-search" />
                   <input type="submit" name="btn-search" id="btn-search" size="40" maxlength="40" value="Tìm kiếm" />
@@ -48,8 +59,7 @@
         <!--end search form-->   
 		</div>
         <!--end menutop-->
-      
-    <!-- InstanceEndEditable -->	
+	<!-- InstanceEndEditable -->	
          
         
    	  
@@ -99,20 +109,50 @@
         <!--star content right-->
 		<div class="content-right">
 		<!-- InstanceBeginEditable name="main-content" -->
+        <p style="text-align: center;color: blue; font-size: 35px;">Thay đổi mật khẩu</p>
+        <form action="changePassWord.php" method="post">
+        <table class="table-change-pw">
+        	<tr>
+            	<td><label>Tên tài khoản:</label></td>
+                <td><input type="text" class="username" id="username" size="50" maxlength="20" placeholder="Nhập tên tài khoản tại đây.." required /></td>
+            </tr>
+            <tr>
+            	<td><label>Mật khẩu hiện tại:</label></td>
+                <td><input type="password" class="oldpasword" id="oldpassword" size="50" maxlength="20" placeholder="Nhập mật khẩu cũ tại đây.." required /></td>
+            </tr>
+            <tr>
+            	<td><label>Mật khẩu mới:</label></td>
+                <td><input type="password" class="newpasword" id="newpassword" size="50" maxlength="20" placeholder="Nhập mật khẩu mới tại đây.." required /></td>
+            </tr>
+            <tr>
+            	<td><label>Nhập lại mật khẩu mới:</label></td>
+                <td><input type="password" id="confirm_password" size="50" maxlength="20" placeholder="Nhập lại mật khẩu mới tại đây.." required /><span id='message'></span></td>
+            </tr>
+            <tr>
+            	<td>
+                	<input type="submit" name="change" value="Đổi mật khẩu" />
+                	<input type="reset" name="reset" value="Reset" />
+        			<input type="button" onclick="gotoback()" value="Quay lại" ></td>
+                </td>
+                
+            </tr>
+        </table>
+        </form>
         <?php 
-				include_once "loadDocNew.php";
-				
-				include_once "Table_index.php";
-				
-				
-		 ?>
-        
+		include_once "connections.php";
+		$username = $_POST['username'];
+		$oldpassword = $_POST['oldpassword'];
+		$oldpassword = sha1($oldpassword);
+		$newpassword = $_POST['newpassword'];
+		$sql = " SELECT * FROM accounts WHERE userName = $username AND passWord = $oldpassword";
+		$result = mysqli_query($conn, $sql);
+		$row = mysqli_fetch_array($result);
+		$id = $row['id'];
+		$check = mysqli_num_rows($result);
 		
-                    
-   
-	
-	
-	<!-- InstanceEndEditable -->
+		echo $username."br".$oldpassword."br".$newpassword."br". $id."br".$check;
+		?>
+		<!-- InstanceEndEditable -->
         </div>
         <!--end content right-->
     </div>
