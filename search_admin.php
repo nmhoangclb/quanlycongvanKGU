@@ -54,17 +54,21 @@
               	<li class="dropdown">
                     <input type="checkbox" />
                     <a href="#" data-toggle="dropdown">Tất cả văn bản</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="nam2018.php">+ Năm 2018</a></li>
+                        <li><a href="nam2017.php">+ Năm 2017</a></li>
+                  	</ul>
                 </li>
                 <li class="dropdown">
-                    <input type="checkbox" checked />
+                    <input type="checkbox"/>
                     <a href="#" data-toggle="dropdown">Lĩnh vực</a>
                     <ul class="dropdown-menu">
                         <li><a href="yte.php">+ Y tế</a></li>
-                        <li><a href="#">+ Các lĩnh vực khác</a></li>
+                        <li><a href="linhvuckhac.php">+ Các lĩnh vực khác</a></li>
                   	</ul>
                 </li>
                 <li class="dropdown" >
-                    <input type="checkbox" checked />
+                    <input type="checkbox"/>
                     <a href="#" data-toggle="dropdown">Cơ quan ban hành</a>
 					<ul class="dropdown-menu">
                         <li><a href="#">UBND Tỉnh</a></li>
@@ -129,7 +133,7 @@
 		// PHẦN HIỂN THỊ VĂN BẢN
 		// BƯỚC 6: HIỂN THỊ DANH SÁCH VĂN BẢN
 		if($total_records){
-				echo "<p>Tổng số văn bản tìm thấy: $total_records</p>";
+				echo "<p><b>Tổng số văn bản: $total_records</b></p>";
 				//Mở thẻ table và tbody
 				echo "<table class='documents'>
 						<tr>

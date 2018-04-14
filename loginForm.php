@@ -1,10 +1,11 @@
-<?php session_start(); ?>
+<?php ob_start(); session_start(); ?>
 
 <?php
 
   if(isset($_SESSION['user'])){
     header('Location: admin.php');
   }
+  ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,7 +84,7 @@ span.matkhau {
 
 <form action="login.php" method="POST">
   <div class="imgcontainer">
-    <img src="images/congvanlogo.PNG" alt="congvanlogo" class="congvanlogo">
+    <img src="images/congvanlogo.png" alt="congvanlogo.png" class="congvanlogo">
   </div>
 
   <div class="container">

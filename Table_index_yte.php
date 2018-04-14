@@ -3,7 +3,7 @@
 	include_once "connections.php";
 
 	// BƯỚC 2: TÌM TỔNG SỐ RECORDS  SELECT count(congvan.id) as total FROM congvan, taptin WHERE congvan.mataptin = taptin.id
-	$result = mysqli_query($conn, 'SELECT count(idcongvan) as total FROM congvan, taptin WHERE congvan.mataptin = taptin.id');
+	$result = mysqli_query($conn, 'SELECT count(idcongvan) as total FROM congvan, taptin WHERE congvan.mataptin = taptin.id AND linhvuc = 1');
 	$row = mysqli_fetch_assoc($result);
 	$total_records = $row['total'];
 
@@ -28,13 +28,14 @@
 
 	// BƯỚC 5: TRUY VẤN LẤY DANH SÁCH VĂN BẢN
 	// Có limit và start rồi thì truy vấn CSDL lấy danh sách văn bản
-	$result = mysqli_query($conn, "SELECT * FROM congvan, taptin WHERE congvan.mataptin = taptin.id  ORDER BY idcongvan DESC LIMIT $start, $limit");//Desc giảm dần Asc tăng dần
+	$result = mysqli_query($conn, "SELECT * FROM congvan, taptin WHERE congvan.mataptin = taptin.id AND linhvuc = 1 ORDER BY idcongvan DESC LIMIT $start, $limit");//Desc giảm dần Asc tăng dần
 	?>
 <div>
 	<?php 
     // PHẦN HIỂN THỊ VĂN BẢN
     // BƯỚC 6: HIỂN THỊ DANH SÁCH VĂN BẢN
     if($total_records){
+				echo "<p><b>Tổng số văn bản: $total_records</b></p>";
                 //Mở thẻ table và tbody
                 echo "<table class='documents'>
                         <tr>
@@ -66,7 +67,7 @@
 
     // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
     if ($current_page > 1 && $total_page > 1){
-        echo '<a class="page-prev" href="index.php?page='.($current_page-1).'">Trang trước</a>';
+        echo '<a class="page-prev" href="yte.php?page='.($current_page-1).'">Trang trước</a>';
     }
     
     // Lặp khoảng giữa
@@ -77,13 +78,13 @@
             echo '<span class="page-select">'.$i.'</span>';
         }
         else{
-            echo '<a class="page-number" href="index.php?page='.$i.'">'.$i.'</a>';
+            echo '<a class="page-number" href="yte.php?page='.$i.'">'.$i.'</a>';
         }
     }
 
     // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
     if ($current_page < $total_page && $total_page > 1){
-        echo '<a class="page-next" href="index.php?page='.($current_page+1).'">Trang sau</a>';
+        echo '<a class="page-next" href="yte.php?page='.($current_page+1).'">Trang sau</a>';
     }
     
    ?>

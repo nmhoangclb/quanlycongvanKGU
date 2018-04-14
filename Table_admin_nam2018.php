@@ -3,7 +3,7 @@
 	include_once "connections.php";
 
 	// BƯỚC 2: TÌM TỔNG SỐ RECORDS  SELECT count(congvan.id) as total FROM congvan, taptin WHERE congvan.mataptin = taptin.id
-	$result = mysqli_query($conn, 'SELECT count(idcongvan) as total FROM congvan, taptin WHERE congvan.mataptin = taptin.id');
+	$result = mysqli_query($conn, "SELECT count(idcongvan) as total FROM congvan, taptin WHERE congvan.mataptin = taptin.id AND ngayVanBan LIKE '%2018%'");
 	$row = mysqli_fetch_assoc($result);
 	$total_records = $row['total'];
 
@@ -28,13 +28,14 @@
 
 	// BƯỚC 5: TRUY VẤN LẤY DANH SÁCH VĂN BẢN
 	// Có limit và start rồi thì truy vấn CSDL lấy danh sách văn bản
-	$result = mysqli_query($conn, "SELECT * FROM congvan, taptin WHERE congvan.mataptin = taptin.id  ORDER BY idcongvan DESC LIMIT $start, $limit");//Desc giảm dần Asc tăng dần
+	$result = mysqli_query($conn, "SELECT * FROM congvan, taptin WHERE congvan.mataptin = taptin.id AND ngayVanBan LIKE '%2018%' ORDER BY idcongvan DESC LIMIT $start, $limit");//Desc giảm dần Asc tăng dần
 	?>
 <div>
 	<?php 
     // PHẦN HIỂN THỊ VĂN BẢN
     // BƯỚC 6: HIỂN THỊ DANH SÁCH VĂN BẢN
     if($total_records){
+				echo "<p><b>Tổng số văn bản: $total_records</b></p>";
                 //Mở thẻ table và tbody
                 echo "<table class='documents'>
                         <tr>
@@ -42,13 +43,25 @@
                             <th>Ngày văn bản</th>
                             <th>Trích yếu nội dung</th>
                             <th>Toàn văn</th>
+							<th style='padding-right:1%'>Sửa</th>
+							<th>Xoá</th>
                         </tr>";
                 while ($row = mysqli_fetch_array($result)){
                     echo "	<tr>
                                 <td>". $row['soHieu'] ."</td>
                                 <td>". $row['ngayVanBan'] ."</td>
-                                <td><a href='detail.php?id=".$row['idcongvan']."'>".$row['noiDung']."</a></td>
+                                <td>". $row['noiDung'] ."</td>
                                 <td><a href='./upload/".$row['Name']. "'>".  $row['Name'] ."</a></td>
+								<td>
+									<a href='updateDoc.php?id=".  $row['idcongvan'] ."'> 
+										<img src='images/edit.png' width='20' height='20'/>
+									</a>
+								</td>
+								<td>
+									<a href='delete.php?id=".  $row['idcongvan'] ."'> 
+										<img src='images/delete.png' width='20' height='20'/>
+									</a>
+								</td>
                             </tr>";
 
                 }
@@ -66,7 +79,7 @@
 
     // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
     if ($current_page > 1 && $total_page > 1){
-        echo '<a class="page-prev" href="index.php?page='.($current_page-1).'">Trang trước</a>';
+        echo '<a class="page-prev" href="nam2018.php?page='.($current_page-1).'">Trang trước</a>';
     }
     
     // Lặp khoảng giữa
@@ -77,13 +90,13 @@
             echo '<span class="page-select">'.$i.'</span>';
         }
         else{
-            echo '<a class="page-number" href="index.php?page='.$i.'">'.$i.'</a>';
+            echo '<a class="page-number" href="nam2018.php?page='.$i.'">'.$i.'</a>';
         }
     }
 
     // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
     if ($current_page < $total_page && $total_page > 1){
-        echo '<a class="page-next" href="index.php?page='.($current_page+1).'">Trang sau</a>';
+        echo '<a class="page-next" href="nam2018.php?page='.($current_page+1).'">Trang sau</a>';
     }
     
    ?>

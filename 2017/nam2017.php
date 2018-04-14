@@ -1,21 +1,11 @@
-<?php session_start(); ?>
-<?php
-
-  if(isset($_SESSION['user'])){
-	//Todo
-  }else{
-	header('Location: loginForm.php');
-	exit();
-  }
-?>
-
+<?php  session_start(); ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/templates.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
 <!-- InstanceBeginEditable name="doctitle" -->
-<link rel="stylesheet" type="text/css" href="css/style-table-admin.css"/>
+<link rel="stylesheet" type="text/css" href="css/style-table.css"/>
 <title>Untitled Document</title>
 <!-- InstanceEndEditable -->
 <!-- InstanceBeginEditable name="head" -->
@@ -32,8 +22,11 @@
 	<div class="header" id="header">
 		<a href="index.php"><img src="images/logo.png" width="1000" height="140" alt="logo.png" /></a>
 	<!-- InstanceBeginEditable name="MenuTop" -->
-    	<!--Start menutop-->
-		<div class="topnav">
+    	<?php
+		
+	  if(isset($_SESSION['user'])){ ?>
+      
+	    <div class="topnav">
           <a  href="index.php">Trang chủ</a>
           <a class="active" href="admin.php">Trang quản trị</a>
           <a href="updateDoc.php">Thêm công văn</a>
@@ -41,15 +34,38 @@
           <a href="logout.php">Đăng xuất</a>
           <!--start search form-->
             <div class="form-search">
-                <form id="form-search" name="form1" method="get" action="search_admin.php">
+                <form id="form-search" name="form1" method="get" action="search_admin_nam2017.php">
                   <label>Tìm kiếm:</label>
-                  <input type="text" name="txt-search" id="txt-search" autofocus="autofocus" />
+                  <input type="text" name="txt-search" id="txt-search" />
                   <input type="submit" name="btn-search" id="btn-search" size="40" maxlength="40" value="Tìm kiếm" />
                 </form>
             </div>  
         <!--end search form-->   
 		</div>
         <!--end menutop-->
+		
+		<?php
+	  }else{
+	  	?>
+		<div class="topnav">
+          <a class="active" href="index.php">Trang chủ</a>
+          <a href="admin.php">Trang quản trị</a>
+          <a href="#contact.php">Liên hệ - Góp ý</a>
+          <a href="#about.php">Giới thiệu</a>
+          <!--start search form-->
+            <div class="form-search">
+                <form id="form-search" name="form1" method="get" action="search_index_nam2017.php">
+                  <label>Tìm kiếm:</label>
+                  <input type="text" name="txt-search" id="txt-search" />
+                  <input type="submit" name="btn-search" id="btn-search" size="40" maxlength="40" value="Tìm kiếm" />
+                </form>
+            </div>  
+        <!--end search form-->   
+		</div>
+        <!--end menutop-->
+		<?php
+	  }
+	?>
 	<!-- InstanceEndEditable -->	
          
         
@@ -104,7 +120,12 @@
         <!--star content right-->
 		<div class="content-right">
 		<!-- InstanceBeginEditable name="main-content" -->
-        	<?php include "show_table_admin.php"; ?>
+        <?php 
+			 if(isset($_SESSION['user'])){include_once "Table_admin_nam2017.php";}
+			 else{
+				 include_once "Table_index_nam2017.php";
+				 } 
+		?>
 		<!-- InstanceEndEditable -->
         </div>
         <!--end content right-->

@@ -1,8 +1,8 @@
-<?php 
-	session_start(); 
+<?php ob_start(); session_start(); ?> 
+<?php
 	  if(isset($_SESSION['user'])){
-	    header('Location: admin.php');
-		exit();
+			header('Location: admin.php');
+			exit();
 	  }
 	
     include_once "connections.php";
@@ -30,8 +30,10 @@
 				}
 		header('Location: admin.php');
 	}else{
+		
+		
 		echo'<script>alert("Bạn đã nhập sai tài khoản hoặc mật khẩu! Vui lòng đăng nhập lại!");</script>';
-		header('Location: login.html');
+		echo "<meta http-equiv='refresh' content='0;URL=\"loginForm.php\"'>";
 		}
 	
 //đóng kết nối database
@@ -39,5 +41,5 @@
 
 
 
-
+ob_end_flush();
  ?>

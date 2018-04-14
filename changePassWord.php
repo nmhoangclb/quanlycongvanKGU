@@ -45,9 +45,10 @@ var check = function() {
     	<!--Start menutop-->
 		<div class="topnav">
           <a href="index.php">Trang chủ</a>
-          <a href="#admin.php">Trang quản trị</a>
+          <a href="admin.php">Trang quản trị</a>
+          <a href="updateDoc.php">Thêm công văn</a>
           <a class="active" href="changePassWord.php">Đổi mật khẩu</a>
-          <a href="#about.php">Giới thiệu</a>
+          <a href="logout.php">Đăng xuất</a>
           <!--start search form-->
             <div class="form-search">
                 <form id="form-search" name="form1" method="get" action="">
@@ -74,17 +75,21 @@ var check = function() {
               	<li class="dropdown">
                     <input type="checkbox" />
                     <a href="#" data-toggle="dropdown">Tất cả văn bản</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="nam2018.php">+ Năm 2018</a></li>
+                        <li><a href="nam2017.php">+ Năm 2017</a></li>
+                  	</ul>
                 </li>
                 <li class="dropdown">
-                    <input type="checkbox" checked />
+                    <input type="checkbox"/>
                     <a href="#" data-toggle="dropdown">Lĩnh vực</a>
                     <ul class="dropdown-menu">
                         <li><a href="yte.php">+ Y tế</a></li>
-                        <li><a href="#">+ Các lĩnh vực khác</a></li>
+                        <li><a href="linhvuckhac.php">+ Các lĩnh vực khác</a></li>
                   	</ul>
                 </li>
                 <li class="dropdown" >
-                    <input type="checkbox" checked />
+                    <input type="checkbox"/>
                     <a href="#" data-toggle="dropdown">Cơ quan ban hành</a>
 					<ul class="dropdown-menu">
                         <li><a href="#">UBND Tỉnh</a></li>
@@ -114,19 +119,19 @@ var check = function() {
         <table class="table-change-pw">
         	<tr>
             	<td><label>Tên tài khoản:</label></td>
-                <td><input type="text" class="username" id="username" size="50" maxlength="20" placeholder="Nhập tên tài khoản tại đây.." required /></td>
+                <td><input type="text" name="username" id="username" size="50" maxlength="20" value="admin" /></td>
             </tr>
             <tr>
             	<td><label>Mật khẩu hiện tại:</label></td>
-                <td><input type="password" class="oldpasword" id="oldpassword" size="50" maxlength="20" placeholder="Nhập mật khẩu cũ tại đây.." required /></td>
+                <td><input type="password" name="oldpassword" id="oldpassword" size="50" maxlength="20" placeholder="Nhập mật khẩu cũ tại đây.." required autofocus="autofocus" /></td>
             </tr>
             <tr>
             	<td><label>Mật khẩu mới:</label></td>
-                <td><input type="password" class="newpasword" id="newpassword" size="50" maxlength="20" placeholder="Nhập mật khẩu mới tại đây.." required /></td>
+                <td><input type="password" name="newpassword" id="newpassword" size="50" maxlength="20" placeholder="Nhập mật khẩu mới tại đây.." required /></td>
             </tr>
             <tr>
             	<td><label>Nhập lại mật khẩu mới:</label></td>
-                <td><input type="password" id="confirm_password" size="50" maxlength="20" placeholder="Nhập lại mật khẩu mới tại đây.." required /><span id='message'></span></td>
+                <td><input type="password" name="confirm_password" id="confirm_password" size="50" maxlength="20" placeholder="Nhập lại mật khẩu mới tại đây.." required /><span id='message'></span></td>
             </tr>
             <tr>
             	<td>
@@ -140,17 +145,39 @@ var check = function() {
         </form>
         <?php 
 		include_once "connections.php";
-		$username = $_POST['username'];
-		$oldpassword = $_POST['oldpassword'];
-		$oldpassword = sha1($oldpassword);
-		$newpassword = $_POST['newpassword'];
-		$sql = " SELECT * FROM accounts WHERE userName = $username AND passWord = $oldpassword";
-		$result = mysqli_query($conn, $sql);
-		$row = mysqli_fetch_array($result);
-		$id = $row['id'];
-		$check = mysqli_num_rows($result);
+		if(isset($_POST['change'])){
+			$username = $_POST['username'];
+			$oldpassword = $_POST['oldpassword'];
+			$oldpassword = sha1($oldpassword);
+			$newpassword = $_POST['newpassword'];
+			$confirm_password = $_POST['confirm_password'];
+			$sql = " SELECT * FROM accounts WHERE userName = '$username' AND passWord = '$oldpassword'";
+			//echo "<p>username:$username</p> hihihihih <p>oldpass:$oldpassword</p><p>newpass:$newpassword</p>";
+			$result = mysqli_query($conn, $sql);
+			$row = mysqli_fetch_array($result);
+			$id = $row['id'];
+			$check = mysqli_num_rows($result);
+			
+			if($check && $confirm_password != $newpassword){
+				echo'<script>alert("Mật khẩu mới không trùng nhau!");</script>';
+				echo "<meta http-equiv='refresh' content='0;URL=\"changePassWord.php\"'>";
+				}
+			elseif($check && $confirm_password == $newpassword){
+				$newpassword = sha1($newpassword);
+				$queryChange = " UPDATE accounts
+				SET passWord = '$newpassword' 
+				WHERE userName = '$username'";
+				mysqli_query($conn, $queryChange);
+				echo'<script>alert("Bạn đã đổi tài khoản thành công!");</script>';
+				}
+			else{
+				echo'<script>alert("Bạn đã nhập sai mật khẩu! Vui lòng nhập lại!");</script>';
+				echo "<meta http-equiv='refresh' content='0;URL=\"changePassWord.php\"'>";
+				}
 		
-		echo $username."br".$oldpassword."br".$newpassword."br". $id."br".$check;
+		//echo $username."br".$oldpassword."br".$newpassword."br". $id."br".$check;
+		}
+		mysqli_close($conn);
 		?>
 		<!-- InstanceEndEditable -->
         </div>

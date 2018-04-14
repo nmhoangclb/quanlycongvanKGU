@@ -12,7 +12,7 @@
         $result_last_row = mysqli_query($conn, $last_row);
         $row_last = mysqli_fetch_array($result_last_row);
         $document_new = "Số hiệu: ".$row_last['soHieu']." - Nội dung: ".$row_last['noiDung']." - Ngày ký: ".$row_last['ngayVanBan'];
-        echo "<span style='color:blue'>".$document_new."</span>";
+        echo "<span style='color:blue'><a href='detail.php?id=".$row_last['idcongvan']."'>".$document_new."</a></span>";
         echo "</marquee>";
         echo "<span><b>Tổng số văn bản:$number_row</b></span>";
     	echo '</div>';

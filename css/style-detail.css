@@ -1,0 +1,19 @@
+.detail {
+	border: 1px solid;
+	background:#9CF;
+	width: 100%;
+	text-align:left;
+	border-collapse: collapse;
+	}
+.detail tr, td{
+	border: 1px solid !important;
+	padding: 8px;
+	height:30px;
+	}
+.col1 {
+	width: 150px;
+	}
+
+.detail tr:nth-child(even){
+		background-color: #CDECF8;
+}

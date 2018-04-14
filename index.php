@@ -41,7 +41,7 @@
             <div class="form-search">
                 <form id="form-search" name="search" method="get" action="search.php">
                   <label>Tìm kiếm:</label>
-                  <input type="text" name="txt-search" id="txt-search" />
+                  <input type="text" name="txt-search" id="txt-search" autofocus="autofocus" />
                   <input type="submit" name="btn-search" id="btn-search" size="40" maxlength="40" value="Tìm kiếm" />
                 </form>
             </div>  
@@ -64,17 +64,21 @@
               	<li class="dropdown">
                     <input type="checkbox" />
                     <a href="#" data-toggle="dropdown">Tất cả văn bản</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="nam2018.php">+ Năm 2018</a></li>
+                        <li><a href="nam2017.php">+ Năm 2017</a></li>
+                  	</ul>
                 </li>
                 <li class="dropdown">
-                    <input type="checkbox" checked />
+                    <input type="checkbox"/>
                     <a href="#" data-toggle="dropdown">Lĩnh vực</a>
                     <ul class="dropdown-menu">
                         <li><a href="yte.php">+ Y tế</a></li>
-                        <li><a href="#">+ Các lĩnh vực khác</a></li>
+                        <li><a href="linhvuckhac.php">+ Các lĩnh vực khác</a></li>
                   	</ul>
                 </li>
                 <li class="dropdown" >
-                    <input type="checkbox" checked />
+                    <input type="checkbox"/>
                     <a href="#" data-toggle="dropdown">Cơ quan ban hành</a>
 					<ul class="dropdown-menu">
                         <li><a href="#">UBND Tỉnh</a></li>

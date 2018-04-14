@@ -1,3 +1,4 @@
+
     <?php
     /**
      * @param $fileName
@@ -23,6 +24,7 @@
             "error" => [],
             "path" => ""
         ];
+	
 
         if ($fileSize > $maxSize) {
             $result["error"][] = [
@@ -47,9 +49,7 @@
     }
     ?>
     <?php
-//                    echo "<pre class='text-left'>";
-//                    var_dump($_FILES);
-//                    echo "</pre>";
+
     //upload file
     $folder_to_upload = './upload';
     $allowType = [ 'doc', 'docx', 'rar', 'zip','pdf','xlsx', 'text'];
@@ -62,26 +62,34 @@
 
         echo '<div class="update-failed">
               
-              <strong>Error!</strong> ' . $error . '
+              <strong>Tải lên lỗi!</strong> ' . $error . '
             </div>';
             header( "Refresh:3; url='admin.php'");
             exit;
-    } else {
+    } 
+	else {
         echo '<div class="update-success">
               
-              <strong>Success!</strong> File path: <pre>' . $upload_result["path"] . '</pre>
+              <strong>Tải lên thành công!</strong> File path: <pre>' . $upload_result["path"] . '</pre>
 
             </div>';
-            //get giá trị của form
+		
+		//get giá trị của form
             include_once "connections.php";
             $sohieu = $_POST['sohieu'];                  
-            $ngaybanhanh = $_POST['ngaybanhanh'];
+            $ngayvanban = $_POST['ngayvanban'];
+			$ngayhieuluc = $_POST['ngayhieuluc'];
+			$nguoiky = $_POST['nguoiky'];
             $noidung = $_POST['noidung'];
+			$conhieuluc = $_POST['conhieuluc'];
+			$coquanbanhanh = $_POST['coquanbanhanh'];
+			$hinhthucvanban = $_POST['hinhthucvanban'];
+			$linhvuc = $_POST['linhvuc'];
+			$loaivanban = $_POST['loaivanban'];
             //Insert fileName vào table taptin
             $ten_tap_tin = $upload_result["path"];
             $ten_tap_tin = substr($ten_tap_tin, 9);
-                //echo $ten_tap_tin;
-
+			
             $insert_File_Name = "INSERT INTO taptin ( Name ) VALUES ('" .$ten_tap_tin. "')";
             mysqli_query($conn,  $insert_File_Name);
             //Xử lý mã tập tin
@@ -89,36 +97,34 @@
             $result_taptin = mysqli_query($conn, $sql_select_id );
             $row_taptin = mysqli_fetch_array($result_taptin);
             $mataptin = $row_taptin['id'];
+			//in ra gia tri
+            echo "<p>$sohieu</p>";
+			echo "<p>$ngayvanban</p>";
+			echo "<p>$ngayhieuluc</p>";
+			echo "<p>$noidung</p>";
+			echo "<p>$nguoiky</p>";
+			echo "<p>$mataptin</p>";
+			echo "<p>$conhieuluc</p>";
+			echo "<p>$coquanbanhanh</p>";
+			echo "<p>$hinhthucvanban</p>";
+			echo "<p>$linhvuc</p>";
+			echo "<p>$loaivanban</p>";
 
-            $ngayhieuluc = $_POST['ngayhieuluc'];
-            $hinhthucvanban = $_POST['hinhthucvanban'];
-            $coquanbanhanh = $_POST['coquanbanhanh'];
-            $conhieuluc = $_POST['conhieuluc'];
-            $loaivanban = $_POST['loaivanban'];
-            $linhvuc = $_POST['linhvuc'];
-            $linhvuc = substr($linhvuc, 1);
-            
-            // echo $mataptin."<br>".$sohieu."<br>".$noidung."<br>".$ngaybanhanh."<br>".$ngayhieuluc."<br>".$hinhthucvanban."<br>".$coquanbanhanh."<br>".$conhieuluc."<br>".$loaivanban."<br>".$linhvuc;
 
+
+			
             //Đưa giá trị vào db
-            
-            
-            $sql_insert_congvan ='INSERT INTO congvan ( soHieu, ngayVanBan, noiDung, mataptin, conhieuluc, coquanbanhanh, hinhthucvanban, linhvuc, loaivanban) VALUES ("'.$sohieu.'","'.$ngaybanhanh.'","'.$noidung.'","'.$mataptin.'","'.$conhieuluc.'","'.$coquanbanhanh.'","'.$hinhthucvanban.'","'.$linhvuc.'","'.$loaivanban.'")';
+            $sql_insert_congvan = "INSERT INTO `congvan`(`soHieu`, `ngayVanBan`, `ngayHieuLuc`, `noiDung`, `nguoiKy`, `mataptin`, `conhieuluc`, `coquanbanhanh`, `hinhthucvanban`, `linhvuc`, `loaivanban`) 
+VALUES ( '$sohieu', '$ngayvanban', '$ngayhieuluc' , '$noidung', '$nguoiky', '$mataptin', '$conhieuluc', '$coquanbanhanh', '$hinhthucvanban', '$linhvuc', '$loaivanban')";
             mysqli_query($conn, $sql_insert_congvan);
-            mysqli_close($conn);
-
-            header( "Refresh:3; url='admin.php'");
-            exit;
-    }
-
-
-                        
-
-                        
-
-                        
-                        
-
+			
+			
+            mysqli_close($conn);	
+			
+		header( "Refresh:3; url='admin.php'");
+        exit;
+	}
+           
      ?>
 
      

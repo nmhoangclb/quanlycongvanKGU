@@ -1,3 +1,13 @@
+<?php session_start(); ?>
+<?php
+
+  if(isset($_SESSION['user'])){
+	//Todo
+  }else{
+	header('Location: loginForm.php');
+	exit();
+  }
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/templates.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
@@ -23,15 +33,16 @@
 	<!-- InstanceBeginEditable name="MenuTop" -->
     	<!--Start menutop-->
 		<div class="topnav">
-          <a class="active" href="index.php">Trang chủ</a>
-          <a href="admin.php">Trang quản trị</a>
-          <a href="#contact.php">Liên hệ - Góp ý</a>
-          <a href="#about.php">Giới thiệu</a>
+          <a href="index.php">Trang chủ</a>
+          <a class="active" href="admin.php">Trang quản trị</a>
+          <a href="updateDoc.php">Thêm công văn</a>
+          <a href="changePassWord.php">Đổi mật khẩu</a>
+          <a href="logout.php">Đăng xuất</a>
           <!--start search form-->
             <div class="form-search">
-                <form id="form-search" name="form1" method="GET" action="search.php">
+                <form id="form-search" name="form1" method="get" action="search_admin_linhvuckhac.php">
                   <label>Tìm kiếm:</label>
-                  <input type="text" name="txt-search" id="txt-search" value="<?php $search = $_GET['txt-search']; echo $search;  ?>" />
+                  <input type="text" name="txt-search" id="txt-search" />
                   <input type="submit" name="btn-search" id="btn-search" size="40" maxlength="40" value="Tìm kiếm" />
                 </form>
             </div>  
@@ -97,9 +108,9 @@
 	
 	if(isset($_GET['btn-search'] )){
 		$search = $_GET['txt-search'];
-		$sql_search = " SELECT DISTINCT soHieu, ngayVanBan, noiDung, Name 
+		$sql_search = " SELECT DISTINCT idcongvan, soHieu, ngayVanBan, noiDung, Name 
 	FROM congvan, taptin	
-	WHERE congvan.mataptin= taptin.id AND ( soHieu LIKE '%$search%' OR ngayVanBan LIKE '%$search%' OR noiDung LIKE '%$search%' OR Name LIKE '%$search%') ";
+	WHERE congvan.mataptin= taptin.id AND linhvuc = 2 AND ( soHieu LIKE '%$search%' OR ngayVanBan LIKE '%$search%' OR noiDung LIKE '%$search%' OR Name LIKE '%$search%') ";
 		$result = mysqli_query($conn, $sql_search);
 		$row = mysqli_fetch_assoc($result);
 		$total_records = mysqli_num_rows($result);
@@ -128,7 +139,7 @@
 		// Có limit và start rồi thì truy vấn CSDL lấy danh sách văn bản
 		$result = mysqli_query($conn, " SELECT DISTINCT idcongvan, soHieu, ngayVanBan, noiDung, Name
 	FROM congvan, taptin	
-	WHERE  congvan.mataptin = taptin.id AND ( soHieu LIKE '%$search%' OR ngayVanBan LIKE '%$search%' OR noiDung LIKE '%$search%' OR Name LIKE '%$search%' )  ORDER BY ngayVanBan ASC LIMIT $start, $limit");//Desc giảm dần Asc tăng dần
+	WHERE  congvan.mataptin = taptin.id AND linhvuc = 2 AND ( soHieu LIKE '%$search%' OR ngayVanBan LIKE '%$search%' OR noiDung LIKE '%$search%' OR Name LIKE '%$search%' )  ORDER BY ngayVanBan ASC LIMIT $start, $limit");//Desc giảm dần Asc tăng dần
 		// PHẦN HIỂN THỊ VĂN BẢN
 		// BƯỚC 6: HIỂN THỊ DANH SÁCH VĂN BẢN
 		if($total_records){
@@ -140,13 +151,25 @@
 							<th>Ngày văn bản</th>
 							<th>Trích yếu nội dung</th>
 							<th>Toàn văn</th>
+							<th style='padding-right:1%'>Sửa</th>
+				<th>Xoá</th>
 						</tr>";
 				while ($row = mysqli_fetch_array($result)){
 					echo "	<tr>
 								<td>". $row['soHieu'] ."</td>
 								<td>". $row['ngayVanBan'] ."</td>
-								<td><a href='detail.php?id=".$row['idcongvan']."'>".$row['noiDung']."</a></td>
+								<td>". $row['noiDung'] ."</td>
 								<td><a href='./upload/".$row['Name']. "'>".  $row['Name'] ."</a></td>
+								<td>
+									<a href='updateDoc.php?id=".  $row['idcongvan'] ."'> 
+										<img src='images/edit.png' width='20' height='20'/>
+									</a>
+								</td>
+								<td>
+									<a href='delete.php?id=".  $row['idcongvan'] ."'> 
+										<img src='images/delete.png' width='20' height='20'/>
+									</a>
+								</td>
 							</tr>";
 		
 				}
@@ -162,7 +185,7 @@
         
             // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
             if ($current_page > 1 && $total_page > 1){
-                echo '<a class="page-prev" href="search.php?page='.($current_page-1).'&txt-search='.$search.'&btn-search=Tìm+kiếm'.'">Trang trước</a>';
+                echo '<a class="page-prev" href="search_admin_linhvuckhac.php?page='.($current_page-1).'&txt-search='.$search.'&btn-search=Tìm+kiếm'.'">Trang trước</a>';
             }
             
             // Lặp khoảng giữa
@@ -173,13 +196,13 @@
                     echo '<span class="page-select">'.$i.'</span>';
                 }
                 else{
-                    echo '<a class="page-number" href="search.php?page='.$i.'&txt-search='.$search.'&btn-search=Tìm+kiếm'.'">'.$i.'</a>';
+                    echo '<a class="page-number" href="search_admin_linhvuckhac.php?page='.$i.'&txt-search='.$search.'&btn-search=Tìm+kiếm'.'">'.$i.'</a>';
                 }
             }
         
             // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
             if ($current_page < $total_page && $total_page > 1){
-                echo '<a class="page-next" href="search.php?page='.($current_page+1).'&txt-search='.$search.'&btn-search=Tìm+kiếm'.'">Trang sau</a>';
+                echo '<a class="page-next" href="search_admin_linhvuckhac.php?page='.($current_page+1).'&txt-search='.$search.'&btn-search=Tìm+kiếm'.'">Trang sau</a>';
             }
             
            ?>
@@ -197,7 +220,6 @@
 		}
 	
 ?>
-	
 		<!-- InstanceEndEditable -->
         </div>
         <!--end content right-->
