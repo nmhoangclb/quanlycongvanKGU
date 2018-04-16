@@ -281,7 +281,7 @@
 		    				</tr>
                             <input type="hidden" name="macongvan" value="<?php echo $_GET['id'];?>" >
 		    				<tr class="button-form">
-								<td colspan="2"><input type="submit" name="save" value="Cập nhật">
+								<td colspan="2"><input type="submit" name="save" value="Sửa">
 								
 								<input type="button" onclick="gotoback()" value="Quay lại" >
 								</td>

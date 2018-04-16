@@ -117,15 +117,23 @@
         <!-- Kết nối CSDL -->
 			<?php include_once 'connections.php';  ?>
 
-	<?php 
-		if (isset($_GET['id'])){
-			$id = $_GET['id'];
+	<?php
+		$num = 0;
+		$result = null;
+		if(isset($_GET['id']) && is_numeric($_GET['id'])){
+			$result = mysqli_query($conn, "SELECT * FROM congvan, taptin WHERE idcongvan=".$_GET['id'] . " AND congvan.mataptin = taptin.id");
+			$num = mysqli_num_rows($result);
+		}
+		
+		if ($num){
+			//$id = $_GET['id'];
 			// print_r ($id);
-			$sql = "SELECT * FROM congvan WHERE idcongvan=".$id;
-			$result= mysqli_query($conn, $sql);
-			 while ($row = mysqli_fetch_array($result)){ ?>
+			//$sql = "SELECT * FROM congvan WHERE idcongvan=".$id;
+			//$result= mysqli_query($conn, "SELECT * FROM congvan WHERE idcongvan=".$_GET['id']);
+				
+			 $row = mysqli_fetch_array($result)  ?>
              	<p style="text-align: center;color: blue; font-size: 35px;">Sửa công văn, văn bản</p>
-		    	<form class="table-update-form" action="upload.php" method="post" enctype="multipart/form-data" >
+		    	<form class="table-update-form" action="update.php" method="post" enctype="multipart/form-data" >
 		    		<table class="table-form">
 
 		    				<tr>
@@ -142,7 +150,7 @@
 		    					
 		    				</tr>
 		    				<tr>
-		    					<td><label>Ngày có hiệu lực </label><span style="color:#F00">* </span></td>
+		    					<td><span style="color:#F00">* </span><label>Ngày có hiệu lực </label></td>
 		    					<td colspan="2"><input id="ngayhieuluc" type="date"  name="ngayhieuluc" value="<?php echo $row['ngayHieuLuc']; ?>" required></td>
 		    				</tr>
 		    				<tr>
@@ -246,10 +254,10 @@
 		    					<td colspan="2">
 		    					<?php
 		    						$result = mysqli_query($conn, "SELECT id,NameLV FROM linhvuc ORDER BY id DESC");
-				                    while ($row = mysqli_fetch_assoc($result)) {
+				                    while ($row5 = mysqli_fetch_assoc($result)) {
 				                    
-				                    	echo "<input type='radio' checked=True  name='linhvuc' value='"?> <?php echo $row["id"]. "' />" ;
-				                    	echo $row["NameLV"];
+				                    	echo "<input type='radio' checked=True  name='linhvuc' value='"?> <?php echo $row5["id"]. "' />" ;
+				                    	echo $row5["NameLV"];
 				                    	
 				                	};
 				                 ?></td>
@@ -257,26 +265,34 @@
 		    				</tr>
                             <tr>
                                 <td><label>Người ký </label></td>
-                                <td colspan="2"><input type='text' name='nguoiky' size="60" maxlength="50" value="<?php echo $row['nguoiKy']?>"></td>
+                                <td colspan="2"><input type='text' name='nguoiky' size="60" maxlength="50" value="<?php echo $row['nguoiKy'];?>"></td>
                             </tr>
 		    				<tr>
 		    					<td><span style="color:#F00">* </span><label>File đính kèm </label></td>
-								<td colspan="2"><input type="file" name="taptindinhkem" value="" required></td>
+								<td colspan="2">
+                                <?php
+                                	if(empty($row['Name'])){
+                                		echo '<input type="file" name="taptindinhkem">';
+									} else {
+										echo $row['Name'].', chọn file khác nếu muốn thay thế <br><input type="file" name="taptindinhkem">';
+									}
+								?>
+                                </td>
 		    				</tr>
+                            <input type="hidden" name="macongvan" value="<?php echo $_GET['id'];?>" >
 		    				<tr class="button-form">
-								<td colspan="2"><input type="submit" name="save" value="Phát hành">
-								<input type="reset" name="reset" value="Reset">	
+								<td colspan="2"><input type="submit" name="save" value="Sửa">
+								
 								<input type="button" onclick="gotoback()" value="Quay lại" >
 								</td>
 		    				</tr>
 
 		    		</table>
 					
-
 				</form>
 
 	<?php
-	 }
+	 
 		
 	}
 
@@ -284,7 +300,7 @@
         
         
 		<p style="text-align: center;color: blue; font-size: 35px;">Thêm công văn, văn bản</p>
-<form class="table-update-form" action="upload.php" method="post" enctype="multipart/form-data" >
+<form class="table-upload-form" action="upload.php" method="post" enctype="multipart/form-data" >
     <table class="table-form">
 
             <tr>
@@ -379,18 +395,24 @@
             </tr>
             <tr>
                 <td><span style="color:#F00">* </span><label>File đính kèm </label></td>
-                <td colspan="2"><input type="file" name="taptindinhkem" required></td>
+                <td colspan="2">
+                	<input type="file" name="taptindinhkem" id="myFile" required>
+                    <!--<span id="filePatch"></span>
+					<script>
+                        var x = document.getElementById("myFile").value;
+                        document.getElementById("filePatch").innerHTML = x;
+                    </script>-->
+                	
+                </td>
             </tr>
             <tr class="button-form">
-                <td colspan="2"><input type="submit" name="save" value="Phát hành">
-                <input type="reset" name="reset" value="Reset">
+                <td colspan="2"><input type="submit" name="save" value="Thêm">
+                <input type="reset" name="reset" value="Làm mới">
                 <input type="button" onclick="gotoback()" value="Quay lại" ></td>									
             </tr>
         
 
     </table>
-    
-
 	</form> <?php } mysqli_close($conn);?>
 		
 		<!-- InstanceEndEditable -->

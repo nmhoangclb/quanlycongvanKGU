@@ -34,7 +34,7 @@
 
         if (!in_array($ext, $allowType)) {
             $result["error"][] = [
-                "msg" => "File không được cho phép. Chỉ hỗ trợ các định dạng 'doc', 'docx', 'rar', 'zip','pdf','xlsx', 'text'"
+                "msg" => "Chỉ hỗ trợ các định dạng 'doc', 'docx', 'rar', 'zip','pdf','xlsx', 'text' và kích thước phải nhờ hơn 50MB.Vui lòng kiểm tra và thử lại!"
             ];
         }
 
@@ -101,32 +101,14 @@
             $result_taptin = mysqli_query($conn, $sql_select_id );
             $row_taptin = mysqli_fetch_array($result_taptin);
             $mataptin = $row_taptin['id'];
-			//in ra gia tri
-            /*echo "<p>$sohieu</p>";
-			echo "<p>$ngayvanban</p>";
-			echo "<p>$ngayhieuluc</p>";
-			echo "<p>$noidung</p>";
-			echo "<p>$nguoiky</p>";
-			echo "<p>$mataptin</p>";
-			echo "<p>$conhieuluc</p>";
-			echo "<p>$coquanbanhanh</p>";
-			echo "<p>$hinhthucvanban</p>";
-			echo "<p>$linhvuc</p>";
-			echo "<p>$loaivanban</p>";*/
-
-
-
-			
             //Đưa giá trị vào db
             $sql_insert_congvan = "INSERT INTO `congvan`(`soHieu`, `ngayVanBan`, `ngayHieuLuc`, `noiDung`, `nguoiKy`, `mataptin`, `conhieuluc`, `coquanbanhanh`, `hinhthucvanban`, `linhvuc`, `loaivanban`) 
 VALUES ( '$sohieu', '$ngayvanban', '$ngayhieuluc' , '$noidung', '$nguoiky', '$mataptin', '$conhieuluc', '$coquanbanhanh', '$hinhthucvanban', '$linhvuc', '$loaivanban')";
             mysqli_query($conn, $sql_insert_congvan);
-			
-			
-            mysqli_close($conn);	
-			
-		header( "Refresh:3; url='admin.php'");
-        exit;
+            mysqli_close($conn);
+			echo "<script>alert('Thêm văn bản thành công!');</script>";
+			echo '<script>window.location.assign("admin.php")</script>';
+			exit;
 	}
            
      ?>
