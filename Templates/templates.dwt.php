@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <!-- TemplateBeginEditable name="doctitle" -->
 <title>Untitled Document</title>
 <!-- TemplateEndEditable -->
@@ -18,7 +18,7 @@
 <div  class="wrapper">
 	<!--start header--> <!-- -->	
 	<div class="header" id="header">
-		<a href="index.php"><img src="../images/logo.png" width="1000" height="140" alt="logo.png" /></a>
+		<a href="index.php"><img src="images/logo.png" width="1000" height="140" alt="logo.png" /></a>
 	<!-- TemplateBeginEditable name="MenuTop" -->
     	<!--Start menutop-->
 		<div class="topnav">
@@ -69,19 +69,21 @@
                     <input type="checkbox"/>
                     <a href="#" data-toggle="dropdown">Cơ quan ban hành</a>
 					<ul class="dropdown-menu">
-                        <li><a href="#">UBND Tỉnh</a></li>
-                        <li><a href="#">Chính phủ</a></li>
-                        <li><a href="#">Sở y tế</a></li>                    
+                    	<li><a href="chinhphu.php">Chính phủ</a></li>
+                        <li><a href="ubndtinh.php">UBND Tỉnh</a></li>
+                        <li><a href="quochoi.php">Quốc hội</a></li>
+                        <li><a href="soyte.php">Sở y tế</a></li>                    
 					</ul>
                 </li>
                 <li class="dropdown">
                   <input type="checkbox" checked />
                   <a href="#" data-toggle="dropdown">Hình thức văn bản</a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Văn bản chỉ đạo điều hành</a></li>
-                    <li><a href="#">Nghị quyết</a></li>
-                    <li><a href="#">Thông báo</a></li>
-                    <li><a href="#">Giấy mời</a></li>
+                    <li><a href="baocao.php">Báo cáo</a></li>
+                    <li><a href="congvandieuhanh.php">Công văn điều hành</a></li>
+                    <li><a href="nghiquyet.php">Nghị quyết</a></li>
+                    <li><a href="giaymoi.php">Giấy mời</a></li>                    
+                    <li><a href="thongbao.php">Thông báo</a></li>
                   </ul>
                 </li>
               </ul>

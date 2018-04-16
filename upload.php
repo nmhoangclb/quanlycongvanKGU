@@ -28,13 +28,13 @@
 
         if ($fileSize > $maxSize) {
             $result["error"][] = [
-                "msg" => "Exceeded filesize limit (" . ($maxSize / 1000000) . "MB)"
+                "msg" => "Kích thước file phải nhỏ hơn (" . ($maxSize / 1000000) . "MB)"
             ];
         }
 
         if (!in_array($ext, $allowType)) {
             $result["error"][] = [
-                "msg" => "File type not allowed"
+                "msg" => "File không được cho phép. Chỉ hỗ trợ các định dạng 'doc', 'docx', 'rar', 'zip','pdf','xlsx', 'text'"
             ];
         }
 
@@ -64,7 +64,11 @@
               
               <strong>Tải lên lỗi!</strong> ' . $error . '
             </div>';
-            header( "Refresh:3; url='admin.php'");
+			echo '<script>alert(" '.$error.'");</script>';
+			echo "<script>
+    				window.history.back();
+				</script>";
+            //header( "Refresh:3; url='admin.php'");
             exit;
     } 
 	else {
@@ -98,7 +102,7 @@
             $row_taptin = mysqli_fetch_array($result_taptin);
             $mataptin = $row_taptin['id'];
 			//in ra gia tri
-            echo "<p>$sohieu</p>";
+            /*echo "<p>$sohieu</p>";
 			echo "<p>$ngayvanban</p>";
 			echo "<p>$ngayhieuluc</p>";
 			echo "<p>$noidung</p>";
@@ -108,7 +112,7 @@
 			echo "<p>$coquanbanhanh</p>";
 			echo "<p>$hinhthucvanban</p>";
 			echo "<p>$linhvuc</p>";
-			echo "<p>$loaivanban</p>";
+			echo "<p>$loaivanban</p>";*/
 
 
 

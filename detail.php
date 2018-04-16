@@ -71,19 +71,21 @@
                     <input type="checkbox"/>
                     <a href="#" data-toggle="dropdown">Cơ quan ban hành</a>
 					<ul class="dropdown-menu">
-                        <li><a href="#">UBND Tỉnh</a></li>
-                        <li><a href="#">Chính phủ</a></li>
-                        <li><a href="#">Sở y tế</a></li>                    
+                    	<li><a href="chinhphu.php">Chính phủ</a></li>
+                        <li><a href="ubndtinh.php">UBND Tỉnh</a></li>
+                        <li><a href="quochoi.php">Quốc hội</a></li>
+                        <li><a href="soyte.php">Sở y tế</a></li>                    
 					</ul>
                 </li>
                 <li class="dropdown">
                   <input type="checkbox" checked />
                   <a href="#" data-toggle="dropdown">Hình thức văn bản</a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Văn bản chỉ đạo điều hành</a></li>
-                    <li><a href="#">Nghị quyết</a></li>
-                    <li><a href="#">Thông báo</a></li>
-                    <li><a href="#">Giấy mời</a></li>
+                    <li><a href="baocao.php">Báo cáo</a></li>
+                    <li><a href="congvandieuhanh.php">Công văn điều hành</a></li>
+                    <li><a href="nghiquyet.php">Nghị quyết</a></li>
+                    <li><a href="giaymoi.php">Giấy mời</a></li>                    
+                    <li><a href="thongbao.php">Thông báo</a></li>
                   </ul>
                 </li>
               </ul>
@@ -140,7 +142,14 @@
                     </tr>
                     <tr>
                         <td class="col1">Download</td>
-                        <td class="col2"><?php echo "<a href='upload/".$row['Name']."'>".$row['Name']."</a>"; ?></td>
+                        <td class="col2">
+							<?php $a = $row['Name'] ; 
+							if (strpos($a, '.pdf') !== false) {
+								echo "<a href='Show_pdf.php?file=$a'>".$a."</a>";
+							}else{
+								echo "<a href='upload/".$row['Name']."'>".$row['Name']."</a>";
+							}?>
+						</td>
                     </tr>
                 </table>
 			<?php
