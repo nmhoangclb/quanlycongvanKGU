@@ -25,7 +25,7 @@
 		<div class="topnav">
           <a class="active" href="index.php">Trang chủ</a>
           <a  href="admin.php">Trang quản trị</a>
-          <a href="#contact.php">Liên hệ - Góp ý</a>
+          <a href="#contact.php">Liên hệ</a>
           <a href="about.php">Giới thiệu</a>
           <!--start search form-->
             <div class="form-search">
@@ -144,9 +144,11 @@
 							<th>Toàn văn</th>
 						</tr>";
 				while ($row = mysqli_fetch_array($result)){
+					$time = strtotime($row['ngayVanBan']);
+					$timeFormat = date("m/d/Y", $time);
 					echo "	<tr>
 								<td>". $row['soHieu'] ."</td>
-								<td>". $row['ngayVanBan'] ."</td>
+								<td>".$timeFormat."</td>
 								<td><a href='detail.php?id=".$row['idcongvan']."'>".$row['noiDung']."</a></td>
 								<td><a href='./upload/".$row['Name']. "'>".  $row['Name'] ."</a></td>
 							</tr>";
@@ -207,8 +209,8 @@
     <!--start footer-->
     <div class="footer">
     	<ul>
-        	<li>&copy <a href="https://fb.com/hoang10tn1">Nguyễn Minh Hoàng</a></li>
-            <li>Đơn vị: Đại học Kiên Giang</li>
+        	<li><a href="http://khoatttt.vnkgu.edu.vn/wps/portal">KHOA THÔNG TIN VÀ TRUYỀN THÔNG - TRƯỜNG ĐẠI HỌC KIÊN GIANG</a></li>
+        	<li>&copy <a href="https://fb.com/hoang10tn1">Nguyễn Minh Hoàng - A15TT</a></li>
             <li>Email: hoang1501106004@vnkgu.edu.vn</li>
             <li>Số điện thoại: 01656 9871 140</li>
         </ul>

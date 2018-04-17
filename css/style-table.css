@@ -26,6 +26,9 @@
 .documents tr:nth-child(even){
 		background-color: #CDECF8;
 	}
+.documents a {
+	text-decoration:none;
+	}
 /*number Page*/
 .page-number{
 		background-color: #1f76ef;

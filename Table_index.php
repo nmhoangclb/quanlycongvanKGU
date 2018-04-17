@@ -28,7 +28,7 @@
 
 	// BƯỚC 5: TRUY VẤN LẤY DANH SÁCH VĂN BẢN
 	// Có limit và start rồi thì truy vấn CSDL lấy danh sách văn bản
-	$result = mysqli_query($conn, "SELECT * FROM congvan, taptin WHERE congvan.mataptin = taptin.id  ORDER BY idcongvan DESC LIMIT $start, $limit");//Desc giảm dần Asc tăng dần
+	$result = mysqli_query($conn, "SELECT * FROM congvan, taptin WHERE congvan.mataptin = taptin.id  ORDER BY ngayVanBan DESC LIMIT $start, $limit");//Desc giảm dần Asc tăng dần
 	?>
 <div>
 	<?php 
@@ -36,6 +36,7 @@
     // BƯỚC 6: HIỂN THỊ DANH SÁCH VĂN BẢN
     if($total_records){
                 //Mở thẻ table và tbody
+				echo "<span><b>Tổng số văn bản: $number_row</b></span>";
                 echo "<table class='documents'>
                         <tr>
                             <th>Số, ký hiệu</th>
@@ -44,9 +45,11 @@
                             <th>Toàn văn</th>
                         </tr>";
                 while ($row = mysqli_fetch_array($result)){
+					$time = strtotime($row['ngayVanBan']);
+					$timeFormat = date("m/d/Y", $time);
                     echo "	<tr>
-                                <td>". $row['soHieu'] ."</td>
-                                <td>". $row['ngayVanBan'] ."</td>
+                                <td>". $row['soHieu'] ."</td>							
+                                <td>". $timeFormat."</td>
                                 <td><a href='detail.php?id=".$row['idcongvan']."'>".$row['noiDung']."</a></td>
                                 <td><a href='./upload/".$row['Name']. "'>".  $row['Name'] ."</a></td>
                             </tr>";

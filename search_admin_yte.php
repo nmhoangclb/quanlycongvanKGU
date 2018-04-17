@@ -157,9 +157,11 @@
 				<th>Xoá</th>
 						</tr>";
 				while ($row = mysqli_fetch_array($result)){
+					$time = strtotime($row['ngayVanBan']);
+					$timeFormat = date("m/d/Y", $time);
 					echo "	<tr>
 								<td>". $row['soHieu'] ."</td>
-								<td>". $row['ngayVanBan'] ."</td>
+								<td>".$timeFormat."</td>
 								<td>". $row['noiDung'] ."</td>
 								<td><a href='./upload/".$row['Name']. "'>".  $row['Name'] ."</a></td>
 								<td>
@@ -230,8 +232,8 @@
     <!--start footer-->
     <div class="footer">
     	<ul>
-        	<li>&copy <a href="https://fb.com/hoang10tn1">Nguyễn Minh Hoàng</a></li>
-            <li>Đơn vị: Đại học Kiên Giang</li>
+        	<li><a href="http://khoatttt.vnkgu.edu.vn/wps/portal">KHOA THÔNG TIN VÀ TRUYỀN THÔNG - TRƯỜNG ĐẠI HỌC KIÊN GIANG</a></li>
+        	<li>&copy <a href="https://fb.com/hoang10tn1">Nguyễn Minh Hoàng - A15TT</a></li>
             <li>Email: hoang1501106004@vnkgu.edu.vn</li>
             <li>Số điện thoại: 01656 9871 140</li>
         </ul>

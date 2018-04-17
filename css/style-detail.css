@@ -15,5 +15,9 @@
 	}
 
 .detail tr:nth-child(even){
-		background-color: #CDECF8;
+	background-color: #CDECF8;
 }
+.gotoback {
+	padding: 8px;
+	
+	}

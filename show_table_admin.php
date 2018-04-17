@@ -35,6 +35,7 @@
 		// BƯỚC 6: HIỂN THỊ DANH SÁCH TIN TỨC
 		if($total_records){
 		include_once "loadDocNew.php";
+		echo "<span><b>Tổng số văn bản: $number_row</b></span>";
 		//Mở thẻ table
 		echo "<table class='documents'>
 			<tr>
@@ -49,9 +50,11 @@
 		//print_r($row);<input type='image' src='images/edit.png' alt='edit.png' width='20' height='20'>
 		//  <input type='image' src='images/delete.png' alt='delete.png' width='20' height='20'>
 		//Load data table từ table congvan va taptin
+		$time = strtotime($row['ngayVanBan']);
+		$timeFormat = date("m/d/Y", $time);
 		echo "<tr>
 				<td>". $row['soHieu'] ."</td>
-				<td>". $row['ngayVanBan'] ."</td>
+				<td>".$timeFormat."</td>
 				<td>". $row['noiDung'] ."</td>
 				<td><a href='./upload/".$row['Name']. "'>".  $row['Name'] ."</a></td>
 				<td>

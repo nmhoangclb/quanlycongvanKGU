@@ -26,7 +26,7 @@
           <a href="index.php">Trang chủ</a>
           <a href="admin.php">Trang quản trị</a>
           <a class="active" href="#detail">Chi tiết văn bản</a>
-          <a href="#contact.php">Liên hệ - Góp ý</a>
+          <a href="contact.php">Liên hệ</a>
           <a href="#about.php">Giới thiệu</a>
           <!--start search form-->
             <div class="form-search">
@@ -107,6 +107,7 @@
 			$row = mysqli_fetch_array($result);
 			if($check){ ?>
             	<p style="text-align: center;color: blue; font-size: 35px;">Chi tiết công văn, văn bản</p>
+                
             	<table class="detail">
                     <tr>
                         <td class="col1">Số hiệu</td>
@@ -152,6 +153,14 @@
 						</td>
                     </tr>
                 </table>
+                <br />
+                <input type="button" class="gotoback" value="← Trở lại  " onclick="history.back(-1)" />
+                <!--<button class="button" onclick="goBack()">Trở lại</button>
+				<script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                  </script>-->
 			<?php
 				
 			}
@@ -175,8 +184,8 @@
     <!--start footer-->
     <div class="footer">
     	<ul>
-        	<li>&copy <a href="https://fb.com/hoang10tn1">Nguyễn Minh Hoàng</a></li>
-            <li>Đơn vị: Đại học Kiên Giang</li>
+        	<li><a href="http://khoatttt.vnkgu.edu.vn/wps/portal">KHOA THÔNG TIN VÀ TRUYỀN THÔNG - TRƯỜNG ĐẠI HỌC KIÊN GIANG</a></li>
+        	<li>&copy <a href="https://fb.com/hoang10tn1">Nguyễn Minh Hoàng - A15TT</a></li>
             <li>Email: hoang1501106004@vnkgu.edu.vn</li>
             <li>Số điện thoại: 01656 9871 140</li>
         </ul>

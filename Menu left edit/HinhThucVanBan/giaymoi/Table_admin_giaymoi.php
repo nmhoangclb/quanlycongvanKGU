@@ -47,9 +47,11 @@
 							<th>Xoá</th>
                         </tr>";
                 while ($row = mysqli_fetch_array($result)){
-                    echo "	<tr>
-                                <td>". $row['soHieu'] ."</td>
-                                <td>". $row['ngayVanBan'] ."</td>
+                    $time = strtotime($row['ngayVanBan']);
+		$timeFormat = date("m/d/Y", $time);
+		echo "<tr>
+				<td>". $row['soHieu'] ."</td>
+				<td>".$timeFormat."</td>
                                 <td>". $row['noiDung'] ."</td>
                                 <td><a href='./upload/".$row['Name']. "'>".  $row['Name'] ."</a></td>
 								<td>
