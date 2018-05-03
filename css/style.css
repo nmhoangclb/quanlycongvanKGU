@@ -3,10 +3,15 @@
 /*body {
 	background-color:#69C;
 	} */
+body {
+	background-color:#CFDEEF;
+	}
 .wrapper {	
 	margin: auto;
 	width: 1000px;
 	height:1129px;
+	background-color:#FFF;
+	border:2px solid #FFF;
 	/*border:1px solid;*/
 }
 /* header*/
@@ -421,8 +426,7 @@
 	clear:both;
 	overflow:auto;
 	width:1000px;
-	height:120px;
-	text-align:center;
+	height:120px;	
 	background-color:#09F;
 	padding: 0px;
 	
@@ -430,3 +434,40 @@
 .footer ul li{
 	list-style-type:none;
 	}
+.footer-info {
+	float:left;
+	text-align:left;
+	width:700px;
+	}
+.footer-counter {
+	float:right;
+	text-align:left;
+	width:300px;
+	
+	}
+.visit {
+	margin-top: 10px;
+	margin-right:10px;
+	float:right;
+	font-weight:bold;
+	}
+/*TOP*/
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color: #0C0;
+}

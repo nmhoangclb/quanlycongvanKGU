@@ -60,7 +60,7 @@
 									</a>
 								</td>
 								<td>
-									<a href='delete.php?id=".  $row['idcongvan'] ."'> 
+									<a href='delete.php?id=".  $row['idcongvan'] ."' onclick='return confirm(\"Bạn có muốn xoá?\");'> 
 										<img src='images/delete.png' width='20' height='20'/>
 									</a>
 								</td>

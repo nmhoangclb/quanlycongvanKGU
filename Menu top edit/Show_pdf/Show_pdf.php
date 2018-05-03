@@ -13,6 +13,6 @@
 	
 	
 	?>
-	<embed src="upload/<?php echo $file; ?>" type="application/pdf" width="100%" height="600px" />
+	<embed src="upload/<?php echo $file; ?>" type="application/pdf" width="100%" height="620px" />
 </body>
 </html>

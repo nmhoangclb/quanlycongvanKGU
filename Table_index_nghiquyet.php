@@ -28,7 +28,7 @@
 
 	// BƯỚC 5: TRUY VẤN LẤY DANH SÁCH VĂN BẢN
 	// Có limit và start rồi thì truy vấn CSDL lấy danh sách văn bản
-	$result = mysqli_query($conn, "SELECT * FROM congvan, taptin WHERE congvan.mataptin = taptin.id AND hinhthucvanban = 11 ORDER BY idcongvan DESC LIMIT $start, $limit");//Desc giảm dần Asc tăng dần
+	$result = mysqli_query($conn, "SELECT * FROM congvan, taptin, hinhthucvanban, coquanbanhanh WHERE hinhthucvanban = 11 AND congvan.mataptin = taptin.id AND congvan.hinhthucvanban = hinhthucvanban.id AND congvan.coquanbanhanh = coquanbanhanh.id ORDER BY ngayVanBan DESC LIMIT $start, $limit");//Desc giảm dần Asc tăng dần
 	?>
 <div>
 	<?php 
@@ -38,25 +38,29 @@
 				echo "<p><b>Tổng số văn bản: $total_records</b></p>";
                 //Mở thẻ table và tbody
                 echo "<table class='documents'>
-                        <tr>
-                            <th>Số, ký hiệu</th>
+						<tr>
+							<th>Số, ký hiệu</th>
                             <th>Ngày văn bản</th>
+							<th>Cơ quan ban hành</th>
+							<th>Hình thức văn bản</th>
                             <th>Trích yếu nội dung</th>
                             <th>Toàn văn</th>
-                        </tr>";
-                while ($row = mysqli_fetch_array($result)){
-                    $time = strtotime($row['ngayVanBan']);
-		$timeFormat = date("m/d/Y", $time);
-		echo "<tr>
-				<td>". $row['soHieu'] ."</td>
-				<td>".$timeFormat."</td>
-                                <td><a href='detail.php?id=".$row['idcongvan']."'>".$row['noiDung']."</a></td>
-                                <td><a href='./upload/".$row['Name']. "'>".  $row['Name'] ."</a></td>
-                            </tr>";
-
-                }
-                //Đóng thẻ table và tbody
-                echo "</table>"; 
+						</tr>";
+				while ($row = mysqli_fetch_array($result)){
+					$time = strtotime($row['ngayVanBan']);
+					$timeFormat = date("m/d/Y", $time);
+					echo "	<tr>
+								<td>". $row['soHieu'] ."</td>							
+                                <td>". $timeFormat."</td>
+								<td>". $row['NameCQBH']."</td>
+								<td>". $row['NameHTVB']."</td>
+								<td><a href='detail.php?id=".$row['idcongvan']."'>".$row['noiDung']."</a></td>
+								<td><a href='./upload/".$row['Name']. "'>".  $row['Name'] ."</a></td>
+							</tr>";
+		
+				}
+				//Đóng thẻ table và tbody
+				echo "</table>";
             
             }
             else echo "<p>không có dữ liệu!</p>";

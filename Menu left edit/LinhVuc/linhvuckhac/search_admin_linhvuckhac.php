@@ -13,6 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 <!-- InstanceBeginEditable name="doctitle" -->
 <link rel="stylesheet" type="text/css" href="css/style-table.css"/>
 <title>Untitled Document</title>
@@ -43,7 +45,7 @@
                 <form id="form-search" name="form1" method="get" action="search_admin_linhvuckhac.php">
                   <label>Tìm kiếm:</label>
                   <input type="text" name="txt-search" id="txt-search" />
-                  <input type="submit" name="btn-search" id="btn-search" size="40" maxlength="40" value="Tìm kiếm" />
+                  <input type="submit" name="btn-search" id="btn-search" size="40" maxlength="40" value=" Tìm " />
                 </form>
             </div>  
         <!--end search form-->   
@@ -78,7 +80,7 @@
                   	</ul>
                 </li>
                 <li class="dropdown" >
-                    <input type="checkbox"/>
+                    <input type="checkbox" checked />
                     <a href="#" data-toggle="dropdown">Cơ quan ban hành</a>
 					<ul class="dropdown-menu">
                     	<li><a href="chinhphu.php">Chính phủ</a></li>
@@ -170,7 +172,7 @@
 									</a>
 								</td>
 								<td>
-									<a href='delete.php?id=".  $row['idcongvan'] ."'> 
+									<a href='delete.php?id=".  $row['idcongvan'] ."' onclick='return confirm(\"Bạn có muốn xoá?\");'> 
 										<img src='images/delete.png' width='20' height='20'/>
 									</a>
 								</td>
@@ -218,7 +220,7 @@
 ?>  
            <?php 
 			}
-			else echo "<p>Không tìm thấy văn bản với từ khoá ' $search ' có dữ liệu!</p>";?>           
+			else echo "<p>Không tìm thấy văn bản với từ khoá ' $search ' ! Thử tìm kiếm lại với từ khoá khác !</p>";?>           
  <?php
 
 		}
@@ -231,12 +233,37 @@
 	<!--end content-->
     <!--start footer-->
     <div class="footer">
-    	<ul>
-        	<li><a href="http://khoatttt.vnkgu.edu.vn/wps/portal">KHOA THÔNG TIN VÀ TRUYỀN THÔNG - TRƯỜNG ĐẠI HỌC KIÊN GIANG</a></li>
-        	<li>&copy <a href="https://fb.com/hoang10tn1">Nguyễn Minh Hoàng - A15TT</a></li>
-            <li>Email: hoang1501106004@vnkgu.edu.vn</li>
-            <li>Số điện thoại: 01656 9871 140</li>
-        </ul>
+    	<div class="footer-info">
+            <ul>
+                <li><a href="http://khoatttt.vnkgu.edu.vn/wps/portal">KHOA THÔNG TIN VÀ TRUYỀN THÔNG - TRƯỜNG ĐẠI HỌC KIÊN GIANG</a></li>
+                <li>&copy <a href="https://fb.com/hoang10tn1">Nguyễn Minh Hoàng - A15TT</a></li>
+                <li>Email: hoang1501106004@vnkgu.edu.vn | admin@quanlycongvankgu.tk</li>
+                <li>Số điện thoại: 01656 9871 140</li>
+            </ul>
+          </div>
+          <div class="footer-counter">
+          		<?php include_once 'counter/counter1.php'; ?>
+                <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+                <script>
+				// When the user scrolls down 20px from the top of the document, show the button
+				window.onscroll = function() {scrollFunction()};
+				
+				function scrollFunction() {
+					if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+						document.getElementById("myBtn").style.display = "block";
+					} else {
+						document.getElementById("myBtn").style.display = "none";
+					}
+				}
+				
+				// When the user clicks on the button, scroll to the top of the document
+				function topFunction() {
+					document.body.scrollTop = 0;
+					document.documentElement.scrollTop = 0;
+				}
+				</script>
+                
+          </div>
     </div>
     <!--end footer-->
 </div>
