@@ -58,13 +58,13 @@
 				<td>". $row['noiDung'] ."</td>
 				<td><a href='./upload/".$row['Name']. "'>".  $row['Name'] ."</a></td>
 				<td>
-				<a href='updateDoc.php?id=".  $row['idcongvan'] ."'> 
-				<img src='images/edit.png' width='20' height='20'/>
+				<a title='Chỉnh sửa' href='updateDoc.php?id=".  $row['idcongvan'] ."'> 
+				<img src='images/edit.png' width='25' height='25'/>
 				</a>
 				</td>
 				<td>
-				<a href='delete.php?id=".  $row['idcongvan'] ."' onclick='return confirm(\"Bạn có muốn xoá?\");'> 
-				<img src='images/delete.png' width='20' height='20'/>
+				<a title='Xoá' href='delete.php?id=".  $row['idcongvan'] ."' onclick='return confirm(\"Bạn có muốn xoá?\");'> 
+				<img src='images/delete.png' width='25' height='25'/>
 				</a>
 				</td>
 			</tr>";

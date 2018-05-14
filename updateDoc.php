@@ -73,7 +73,7 @@
 			<div class="container">  
               <ul>
               	<li class="dropdown">
-                    <input type="checkbox" />
+                    <input type="checkbox" checked />
                     <a href="#" data-toggle="dropdown">Tất cả văn bản</a>
                     <ul class="dropdown-menu">
                         <li><a href="nam2018.php">+ Năm 2018</a></li>
@@ -81,7 +81,7 @@
                   	</ul>
                 </li>
                 <li class="dropdown">
-                    <input type="checkbox"/>
+                    <input type="checkbox" checked />
                     <a href="#" data-toggle="dropdown">Lĩnh vực</a>
                     <ul class="dropdown-menu">
                         <li><a href="yte.php">+ Y tế</a></li>

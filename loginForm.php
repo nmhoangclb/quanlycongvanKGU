@@ -102,7 +102,7 @@ span.matkhau {
 
 	<div class="container" style="background-color:#f1f1f1">
     <button type="button" class="cancelbtn" onclick="window.history.go(-1)">Quay lại</button>
-    <span class="matkhau"><a href="quenmatkhau.html">Quên mật khẩu?</a></span>
+    <span class="matkhau"><a href="resetPassWord.php">Quên mật khẩu?</a></span>
   </div> 
 </form>
 
