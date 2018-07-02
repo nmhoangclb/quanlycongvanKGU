@@ -8,6 +8,24 @@
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <!-- InstanceBeginEditable name="doctitle" -->
 <link rel="stylesheet" type="text/css" href="css/style-table.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var tableToExcel = (function() {
+      var uri = 'data:application/vnd.ms-excel;base64,'
+      , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><?xml version="1.0" encoding="UTF-8" standalone="yes"?><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+      , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+      , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+      return function(table, name) {
+        if (!table.nodeType) table = document.getElementById(table)
+            var ctx = {worksheet: name || '', table: table.innerHTML}
+                var link = document.createElement("a");
+                link.download = "congvan_export.xls";
+                link.href = uri + base64(format(template, ctx));
+                link.click();
+            }
+        })()
+
+    </script>
 <title>Cơ quan ban hành Sở Y Tế | Hệ thống quản lý công văn, văn bản</title>
 <!-- InstanceEndEditable -->
 <!-- InstanceBeginEditable name="head" -->
@@ -33,12 +51,11 @@
           <!--start search form-->
             <div class="form-search">
                 <form id="form-search" name="form1" method="get" action="search_index_yte.php">
-                  <label>Tìm kiếm:</label>
-                  <input type="text" name="txt-search" id="txt-search" />
-                  <input type="submit" name="btn-search" id="btn-search" size="40" maxlength="40" value=" Tìm " />
+                  <input type="text" class="txt-search" name="txt-search" id="txt-search" placeholder="Nhập từ khoá cần tìm ..." />
+                  <input type="submit" class="btn-search" name="btn-search" id="btn-search" size="40" maxlength="40" value="Tìm kiếm" />
                 </form>
-            </div>  
-        <!--end search form-->   
+            </div>
+        <!--end search form-->
 		</div>
         <!--end menutop-->
 	<!-- InstanceEndEditable -->	
@@ -98,48 +115,47 @@
 		<div class="content-right">
 		<!-- InstanceBeginEditable name="main-content" -->
         <?php
-	include "connections.php";
-	
-	if(isset($_GET['btn-search'] )){
-		$search = $_GET['txt-search'];
-		$sql_search = " SELECT DISTINCT idcongvan, soHieu, ngayVanBan, noiDung, Name 
-	FROM congvan, taptin	
+include "connections.php";
+
+if (isset($_GET['btn-search'])) {
+	$search = $_GET['txt-search'];
+	$sql_search = " SELECT DISTINCT idcongvan, soHieu, ngayVanBan, noiDung, Name
+	FROM congvan, taptin
 	WHERE congvan.mataptin= taptin.id AND linhvuc = 1 AND ( soHieu LIKE '%$search%' OR ngayVanBan LIKE '%$search%' OR noiDung LIKE '%$search%' OR Name LIKE '%$search%') ";
-		$result = mysqli_query($conn, $sql_search);
-		$row = mysqli_fetch_assoc($result);
-		$total_records = mysqli_num_rows($result);
-		// BƯỚC 3: TÌM LIMIT VÀ CURRENT_PAGE
-		$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-		
-		$limit = 10;
-	
-		// BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
-		// tổng số trang
-		$total_page = ceil($total_records / $limit);
-		
-	
-		// Giới hạn current_page trong khoảng 1 đến total_page
-		if ($current_page > $total_page){
-			$current_page = $total_page;
-		}
-		else if ($current_page < 1){
-			$current_page = 1;
-		}
-	
-		// Tìm Start
-		$start = ($current_page - 1) * $limit;
-	
-		// BƯỚC 5: TRUY VẤN LẤY DANH SÁCH VĂN BẢN
-		// Có limit và start rồi thì truy vấn CSDL lấy danh sách văn bản
-		$result = mysqli_query($conn, "SELECT DISTINCT idcongvan, soHieu, ngayVanBan, noiDung, Name, NameCQBH, NameHTVB
-	FROM congvan, taptin,hinhthucvanban,coquanbanhanh 	
-	WHERE linhvuc = 1 AND congvan.mataptin = taptin.id AND congvan.hinhthucvanban = hinhthucvanban.id AND congvan.coquanbanhanh = coquanbanhanh.id AND ( soHieu LIKE '%$search%' OR ngayVanBan LIKE '%$search%' OR noiDung LIKE '%$search%' OR Name LIKE '%$search%' )  ORDER BY ngayVanBan DESC LIMIT $start, $limit");//Desc giảm dần Asc tăng dần
-		// PHẦN HIỂN THỊ VĂN BẢN
-		// BƯỚC 6: HIỂN THỊ DANH SÁCH VĂN BẢN
-		if($total_records){
-				echo "<p><b>Tổng số văn bản: $total_records</b></p>";
-				//Mở thẻ table và tbody
-				echo "<table class='documents'>
+	$result = mysqli_query($conn, $sql_search);
+	$row = mysqli_fetch_assoc($result);
+	$total_records = mysqli_num_rows($result);
+	// BƯỚC 3: TÌM LIMIT VÀ CURRENT_PAGE
+	$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+	$limit = 10;
+
+	// BƯỚC 4: TÍNH TOÁN TOTAL_PAGE VÀ START
+	// tổng số trang
+	$total_page = ceil($total_records / $limit);
+
+	// Giới hạn current_page trong khoảng 1 đến total_page
+	if ($current_page > $total_page) {
+		$current_page = $total_page;
+	} else if ($current_page < 1) {
+		$current_page = 1;
+	}
+
+	// Tìm Start
+	$start = ($current_page - 1) * $limit;
+
+	// BƯỚC 5: TRUY VẤN LẤY DANH SÁCH VĂN BẢN
+	// Có limit và start rồi thì truy vấn CSDL lấy danh sách văn bản
+	$result = mysqli_query($conn, "SELECT DISTINCT idcongvan, soHieu, ngayVanBan, noiDung, Name, NameCQBH, NameHTVB
+	FROM congvan, taptin,hinhthucvanban,coquanbanhanh
+	WHERE linhvuc = 1 AND congvan.mataptin = taptin.id AND congvan.hinhthucvanban = hinhthucvanban.id AND congvan.coquanbanhanh = coquanbanhanh.id AND ( soHieu LIKE '%$search%' OR ngayVanBan LIKE '%$search%' OR noiDung LIKE '%$search%' OR Name LIKE '%$search%' )  ORDER BY ngayVanBan DESC LIMIT $start, $limit"); //Desc giảm dần Asc tăng dần
+	// PHẦN HIỂN THỊ VĂN BẢN
+	// BƯỚC 6: HIỂN THỊ DANH SÁCH VĂN BẢN
+	if ($total_records) {
+		echo "<p><b>Tổng số văn bản: $total_records</b></p>";
+		echo "<p><a class='btnSearchAdvanced' href='search_advanced.php'>Tìm kiếm nâng cao</a></p>";
+		//Mở thẻ table và tbody
+		echo "<table class='documents' id='documents'>
 						<tr>
 							<th>Số, ký hiệu</th>
                             <th>Ngày văn bản</th>
@@ -148,65 +164,68 @@
                             <th>Trích yếu nội dung</th>
                             <th>Toàn văn</th>
 						</tr>";
-				while ($row = mysqli_fetch_array($result)){
-					$time = strtotime($row['ngayVanBan']);
-					$timeFormat = date("m/d/Y", $time);
-					echo "	<tr>
-								<td>". $row['soHieu'] ."</td>							
-                                <td>". $timeFormat."</td>
-								<td>". $row['NameCQBH']."</td>
-								<td>". $row['NameHTVB']."</td>
-								<td><a href='detail.php?id=".$row['idcongvan']."'>".$row['noiDung']."</a></td>
-								<td><a href='./upload/".$row['Name']. "'>".  $row['Name'] ."</a></td>
+		while ($row = mysqli_fetch_array($result)) {
+			$time = strtotime($row['ngayVanBan']);
+			$timeFormat = date("d/m/Y", $time);
+			echo "	<tr>
+								<td>" . $row['soHieu'] . "</td>
+                                <td>" . $timeFormat . "</td>
+								<td>" . $row['NameCQBH'] . "</td>
+								<td>" . $row['NameHTVB'] . "</td>
+								<td><a href='detail.php?id=" . $row['idcongvan'] . "'>" . $row['noiDung'] . "</a></td>
+								<td><a href='./upload/" . $row['Name'] . "'>" . $row['Name'] . "</a></td>
 							</tr>";
-		
-				}
-				//Đóng thẻ table và tbody
-				echo "</table>"; ?>
-                
-<!--Phân trang-->
-                
-<div class="table-page">
-		   <?php 
-            // PHẦN HIỂN THỊ PHÂN TRANG
-            // BƯỚC 7: HIỂN THỊ PHÂN TRANG
-        
-            // nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
-            if ($current_page > 1 && $total_page > 1){
-                echo '<a class="page-prev" href="search_index_yte.php?page='.($current_page-1).'&txt-search='.$search.'&btn-search=Tìm+kiếm'.'">Trang trước</a>';
-            }
-            
-            // Lặp khoảng giữa
-            for ($i = 1; $i <= $total_page; $i++){
-                // Nếu là trang hiện tại thì hiển thị thẻ span
-                // ngược lại hiển thị thẻ a
-                if ($i == $current_page){
-                    echo '<span class="page-select">'.$i.'</span>';
-                }
-                else{
-                    echo '<a class="page-number" href="search_index_yte.php?page='.$i.'&txt-search='.$search.'&btn-search=Tìm+kiếm'.'">'.$i.'</a>';
-                }
-            }
-        
-            // nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
-            if ($current_page < $total_page && $total_page > 1){
-                echo '<a class="page-next" href="search_index_yte.php?page='.($current_page+1).'&txt-search='.$search.'&btn-search=Tìm+kiếm'.'">Trang sau</a>';
-            }
-            
-           ?>
-</div>
-<?php
-	//đóng kết NỐI
-	mysqli_close($conn);
-
-?>  
-           <?php 
-			}
-			else echo "<p>Không tìm thấy văn bản với từ khoá ' $search ' ! Thử tìm kiếm lại với từ khoá khác !</p>";?>           
- <?php
 
 		}
-	
+		//Đóng thẻ table và tbody
+		echo "</table>";
+echo "<p><button class='btnExportExcel' onclick=tableToExcel('documents','') >Xuất excel</button></p>";
+?>
+
+<!--Phân trang-->
+
+<div class="table-page">
+		   <?php
+// PHẦN HIỂN THỊ PHÂN TRANG
+		// BƯỚC 7: HIỂN THỊ PHÂN TRANG
+
+		// nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
+		if ($current_page > 1 && $total_page > 1) {
+			echo '<a class="page-prev" href="search_index_yte.php?page=' . ($current_page - 1) . '&txt-search=' . $search . '&btn-search=Tìm+kiếm' . '">Trang trước</a>';
+		}
+
+		// Lặp khoảng giữa
+		for ($i = 1; $i <= $total_page; $i++) {
+			// Nếu là trang hiện tại thì hiển thị thẻ span
+			// ngược lại hiển thị thẻ a
+			if ($i == $current_page) {
+				echo '<span class="page-select">' . $i . '</span>';
+			} else {
+				echo '<a class="page-number" href="search_index_yte.php?page=' . $i . '&txt-search=' . $search . '&btn-search=Tìm+kiếm' . '">' . $i . '</a>';
+			}
+		}
+
+		// nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
+		if ($current_page < $total_page && $total_page > 1) {
+			echo '<a class="page-next" href="search_index_yte.php?page=' . ($current_page + 1) . '&txt-search=' . $search . '&btn-search=Tìm+kiếm' . '">Trang sau</a>';
+		}
+
+		?>
+</div>
+<?php
+//đóng kết NỐI
+		mysqli_close($conn);
+
+		?>
+           <?php
+} else {
+		echo "<p>Không tìm thấy văn bản với từ khoá ' $search ' ! Thử tìm kiếm lại với từ khoá khác !</p>";
+	}
+	?>
+ <?php
+
+}
+
 ?>
 		<!-- InstanceEndEditable -->
         </div>
@@ -220,7 +239,7 @@
                 <li><a href="http://khoatttt.vnkgu.edu.vn/wps/portal">KHOA THÔNG TIN VÀ TRUYỀN THÔNG - TRƯỜNG ĐẠI HỌC KIÊN GIANG</a></li>
                 <li>&copy <a href="https://fb.com/hoang10tn1">Nguyễn Minh Hoàng - A15TT</a></li>
                 <li>Email: hoang1501106004@vnkgu.edu.vn | admin@quanlycongvankgu.tk</li>
-                <li>Số điện thoại: 01656 9871 140</li>
+                <li>Số điện thoại: 01656 987 140</li>
             </ul>
           </div>
           <div class="footer-counter">

@@ -25,6 +25,7 @@ body {
 	overflow: auto;
 	
 	background-color: #03F;
+	border:1px solid #FFF;
 }
 
 .topnav a {
@@ -34,6 +35,7 @@ body {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+  border: 1px solid #FFF;
 }
 
 .topnav a:hover {
@@ -47,8 +49,8 @@ body {
 }
 /* Form search */
 .form-search {
-	
-	margin-top:10px;
+	margin-right:10px;
+	margin-top:13px;
 	overflow: auto;
 	float: right;
 	
@@ -471,3 +473,138 @@ body {
 #myBtn:hover {
   background-color: #0C0;
 }
+/*Button tìm kiếm nâng cao*/
+/*
+.btnAdvanced {
+	text-decoration:none;
+	color:#FFF;
+	font-size:12px;
+	}
+.btnSearchAdvanced {
+  background: #f5e7f4;
+  background-image: -webkit-linear-gradient(top, #f5e7f4, #b82b2b);
+  background-image: -moz-linear-gradient(top, #f5e7f4, #b82b2b);
+  background-image: -ms-linear-gradient(top, #f5e7f4, #b82b2b);
+  background-image: -o-linear-gradient(top, #f5e7f4, #b82b2b);
+  background-image: linear-gradient(to bottom, #f5e7f4, #b82b2b);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Courier New;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btnSearchAdvanced:hover {
+  background: #c7eaff;
+  background-image: -webkit-linear-gradient(top, #c7eaff, #0065a8);
+  background-image: -moz-linear-gradient(top, #c7eaff, #0065a8);
+  background-image: -ms-linear-gradient(top, #c7eaff, #0065a8);
+  background-image: -o-linear-gradient(top, #c7eaff, #0065a8);
+  background-image: linear-gradient(to bottom, #c7eaff, #0065a8);
+  text-decoration: none;
+} */
+.btnSearchAdvanced {
+	-moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
+	box-shadow:inset 0px 1px 0px 0px #f29c93;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100));
+	background:-moz-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+	background:-webkit-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+	background:-o-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+	background:-ms-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
+	background:linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100',GradientType=0);
+	background-color:#fe1a00;
+	-moz-border-radius:12px;
+	-webkit-border-radius:12px;
+	border-radius:12px;
+	border:1px solid #d83526;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:11px;
+	font-weight:bold;
+	padding:5px 13px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+}
+.btnSearchAdvanced:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00));
+	background:-moz-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+	background:-webkit-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+	background:-o-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+	background:-ms-linear-gradient(top, #ce0100 5%, #fe1a00 100%);
+	background:linear-gradient(to bottom, #ce0100 5%, #fe1a00 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00',GradientType=0);
+	background-color:#ce0100;
+}
+.btnSearchAdvanced:active {
+	position:relative;
+	top:1px;
+}
+/* btnExportExcel*/
+.btnExportExcel {
+	float:right;
+	display: inline-block;
+	padding: 5px 5px;
+	font-size: 15px;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: #fff;
+	background-color: #4CAF50;
+	border: none;
+	border-radius: 15px;
+
+}
+
+.btnExportExcel:hover {background-color: #3e8e41}
+
+.btnExportExcel:active {
+ 	background-color: #3e8e41;
+
+}
+/*button search right*/
+
+.btn-search {
+	background: #ffffff;
+	background-image: -webkit-linear-gradient(top, #ffffff, #005285);
+	background-image: -moz-linear-gradient(top, #ffffff, #005285);
+	background-image: -ms-linear-gradient(top, #ffffff, #005285);
+	background-image: -o-linear-gradient(top, #ffffff, #005285);
+	background-image: linear-gradient(to bottom, #ffffff, #005285);
+	-webkit-border-radius: 10;
+	-moz-border-radius: 10;
+	border-radius: 10px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 11px;
+	padding: 6px 7px 6px 6px;
+	border: solid #ffffff 1px;
+	text-decoration: none;
+}
+.btn-search:hover {
+	
+	background: #ffffff;
+	background-image: -webkit-linear-gradient(top, #ffffff, #009600);
+	background-image: -moz-linear-gradient(top, #ffffff, #009600);
+	background-image: -ms-linear-gradient(top, #ffffff, #009600);
+	background-image: -o-linear-gradient(top, #ffffff, #009600);
+	background-image: linear-gradient(to bottom, #ffffff, #009600);
+	text-decoration: none;
+}
+/*
+.btn-search:active {
+	position:relative;
+	top:1px;
+}
+*/
+        
+
+/* input search */  
+      

@@ -7,6 +7,24 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <!-- InstanceBeginEditable name="doctitle" -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var tableToExcel = (function() {
+      var uri = 'data:application/vnd.ms-excel;base64,'
+      , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><?xml version="1.0" encoding="UTF-8" standalone="yes"?><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+      , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+      , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+      return function(table, name) {
+        if (!table.nodeType) table = document.getElementById(table)
+            var ctx = {worksheet: name || '', table: table.innerHTML}
+                var link = document.createElement("a");
+                link.download = "congvan_export.xls";
+                link.href = uri + base64(format(template, ctx));
+                link.click();
+            }
+        })()
+
+    </script>
 <title>Giới thiệu | Hệ thống quản lý công văn, văn bản</title>
 <!-- InstanceEndEditable -->
 <!-- InstanceBeginEditable name="head" -->
@@ -32,9 +50,8 @@
           <!--start search form-->
             <div class="form-search">
                 <form id="form-search" name="form1" method="get" action="">
-                  <label>Tìm kiếm:</label>
-                  <input type="text" name="txt-search" id="txt-search" />
-                  <input type="submit" name="btn-search" id="btn-search" size="40" maxlength="40" value=" Tìm " />
+                  <input type="text" class="txt-search" name="txt-search" id="txt-search" placeholder="Nhập từ khoá cần tìm ..." />
+                  <input type="submit" class="btn-search" name="btn-search" id="btn-search" size="40" maxlength="40" value="Tìm kiếm" />
                 </form>
             </div>  
         <!--end search form-->   
@@ -104,8 +121,30 @@
                 	<li>Hiển thị công văn - văn bản mới.</li>
                 	<li>Xem danh sách công văn - văn bản.</li>
                     <li>Xem chi tiết từng công văn - văn bản.</li>
+                    <li>Xem công văn online trước khi tải về (Chỉ hỗ trợ 1 số trình duyệt có hỗ trợ embed).</li>
                     <li>Sắp xếp theo công văn - văn bản theo danh mục.</li>
-                    <li>Tìm kiếm công văn - văn bản.</li>
+                    <li>Tìm kiếm công văn - văn bản.
+                    	<ul>
+                        	<li>Tìm kiếm gần đúng theo 3 cột:
+                            	<ul>
+                                    <li> - Số, ký hiệu</li>
+                                    <li> - Ngày văn bản</li>
+                                    <li> - Trích yếu nội dung</li>
+                                </ul>
+                            </li>
+                            <li>Tìm kiếm nâng cao theo các cột:
+                            	<ul>
+                                    <li> - Số, ký hiệu</li>
+                                    <li> - Ngày văn bản</li>
+                                    <li> - Trích yếu nội dung</li>
+                                    <li> - Cơ quan ban hành</li>
+                                    <li> - Hình thức văn bản</li>
+                                    <li> - Người ký</li>
+								</ul>
+                            </li>
+                        </ul>
+                    </li>
+                    </li>
                 </ul>
             </p>
             <p><b>Chức năng quản trị viên:</b></p>
@@ -115,8 +154,20 @@
                 	<li>Xem danh sách công văn - văn bản.</li>
                     <li>Thêm, sửa, xoá công văn - văn bản.</li>
                     <li>Đổi mật khẩu.</li>
+                    <li>Khôi phục mật khẩu bằng câu hỏi bảo mật.</li>
                     <li>Sắp xếp theo công văn - văn bản theo danh mục.</li>
-                    <li>Tìm kiếm công văn - văn bản.</li>
+                    <li>Tìm kiếm công văn - văn bản.
+                    	<ul>
+                        	<li>Tìm kiếm gần đúng theo 3 cột:
+                            	<ul>
+                                    <li> - Số, ký hiệu</li>
+                                    <li> - Ngày văn bản</li>
+                                    <li> - Trích yếu nội dung</li>
+								</ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
                 </ul>
             </p>
             <p></p>

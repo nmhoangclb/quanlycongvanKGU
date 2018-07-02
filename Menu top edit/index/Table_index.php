@@ -37,7 +37,8 @@
     if($total_records){
                 //Mở thẻ table và tbody
 				echo "<span><b>Tổng số văn bản: $number_row</b></span>";
-                echo "<table class='documents'>
+				echo "<p><a class='btnSearchAdvanced' href='search_advanced.php'>Tìm kiếm nâng cao</a></p>";
+                echo "<table class='documents' id='documents'>
                         <tr>
                             <th>Số, ký hiệu</th>
                             <th>Ngày văn bản</th>
@@ -48,7 +49,7 @@
                         </tr>";
                 while ($row = mysqli_fetch_array($result)){
 					$time = strtotime($row['ngayVanBan']);
-					$timeFormat = date("m/d/Y", $time);
+					$timeFormat = date("d/m/Y", $time);
                     echo "	<tr>
                                 <td>". $row['soHieu'] ."</td>							
                                 <td>". $timeFormat."</td>
@@ -60,11 +61,13 @@
 
                 }
                 //Đóng thẻ table và tbody
-                echo "</table>"; 
+                echo "</table>";
+  
             
             }
             else echo "<p>không có dữ liệu!</p>";
     ?>
+
 </div>
 <div class="table-page">
    <?php 

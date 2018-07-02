@@ -7,6 +7,24 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <!-- InstanceBeginEditable name="doctitle" -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var tableToExcel = (function() {
+      var uri = 'data:application/vnd.ms-excel;base64,'
+      , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><?xml version="1.0" encoding="UTF-8" standalone="yes"?><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+      , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+      , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+      return function(table, name) {
+        if (!table.nodeType) table = document.getElementById(table)
+            var ctx = {worksheet: name || '', table: table.innerHTML}
+                var link = document.createElement("a");
+                link.download = "congvan_export.xls";
+                link.href = uri + base64(format(template, ctx));
+                link.click();
+            }
+        })()
+
+    </script>
 <title>Liên hệ | Hệ thống quản lý công văn, văn bản</title>
 <!-- InstanceEndEditable -->
 <!-- InstanceBeginEditable name="head" -->
@@ -32,9 +50,8 @@
           <!--start search form-->
             <div class="form-search">
                 <form id="form-search" name="form1" method="get" action="">
-                  <label>Tìm kiếm:</label>
-                  <input type="text" name="txt-search" id="txt-search" />
-                  <input type="submit" name="btn-search" id="btn-search" size="40" maxlength="40" value=" Tìm " />
+                  <input type="text" class="txt-search" name="txt-search" id="txt-search" placeholder="Nhập từ khoá cần tìm ..." />
+                  <input type="submit" class="btn-search" name="btn-search" id="btn-search" size="40" maxlength="40" value="Tìm kiếm" />
                 </form>
             </div>  
         <!--end search form-->   
@@ -97,12 +114,13 @@
 		<div class="content-right">
 		<!-- InstanceBeginEditable name="main-content" -->
         <div class="contact">
-        	<p>KHOA THÔNG TIN VÀ TRUYỀN THÔNG - TRƯỜNG ĐẠI HỌC KIÊN GIANG</p>
+        	<p><b>KHOA THÔNG TIN VÀ TRUYỀN THÔNG - TRƯỜNG ĐẠI HỌC KIÊN GIANG</b></p>
+            <p><i>Đề tài: Xây dựng website quản lý công văn, văn bản</i></p>
 			<p>Tác giả trang web: Nguyễn Minh Hoàng</p>
             <p>Lớp: A15TT</p>
             <p>Giảng viên hướng dẫn: Đào Thị Phấn</p>
 			<p>Email: hoang1501106004@vnkgu.edu.vn | admin@quanlycongvankgu.tk</p>
-			<p>Số điện thoại: 01656 9871 140</p>
+			<p>Số điện thoại: 01656 987 140</p>
         </div>
 		<!-- InstanceEndEditable -->
         </div>

@@ -37,7 +37,7 @@
 		include_once "loadDocNew.php";
 		echo "<span><b>Tổng số văn bản: $number_row</b></span>";
 		//Mở thẻ table
-		echo "<table class='documents'>
+		echo "<table class='documents' id='documents'>
 			<tr>
 				<th>Số, ký hiệu</th>
 				<th>Ngày văn bản</th>
@@ -51,7 +51,7 @@
 		//  <input type='image' src='images/delete.png' alt='delete.png' width='20' height='20'>
 		//Load data table từ table congvan va taptin
 		$time = strtotime($row['ngayVanBan']);
-		$timeFormat = date("m/d/Y", $time);
+		$timeFormat = date("d/m/Y", $time);
 		echo "<tr>
 				<td>". $row['soHieu'] ."</td>
 				<td>".$timeFormat."</td>
@@ -72,6 +72,7 @@
 		}
 		//Đóng thẻ table
 		echo "</table>";
+
 		}
 		else echo "<p>không có dữ liệu!</p>";		
 		echo '<div class="table-page">'; 
